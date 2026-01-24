@@ -692,6 +692,60 @@
             font-size: 0.9em;
         }
 
+        /* Кнопка "Каталог проектов" */
+        .catalog-btn {
+            display: block;
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: clamp(1rem, 1.3vw, 1.1rem);
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+            border: 2px solid transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .catalog-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .catalog-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .catalog-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 30px;
+        }
+
+        .catalog-btn:hover::before {
+            opacity: 1;
+        }
+
+        .catalog-btn i {
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
         /* Блок соглашения */
         .collaboration-offer {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 140, 0, 0.08));
@@ -1117,7 +1171,7 @@
                 font-size: clamp(1.2rem, 1.8vw, 1.5rem);
             }
             
-            .game-link-btn {
+            .game-link-btn, .catalog-btn {
                 padding: 0.7rem 1.3rem;
                 font-size: 0.9rem;
             }
@@ -1173,7 +1227,7 @@
                 font-size: 1.2rem;
             }
             
-            .game-link-btn {
+            .game-link-btn, .catalog-btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.85rem;
                 width: 100%;
@@ -1664,6 +1718,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Кнопка "Каталог проектов" -->
+                    <a href="catalog.html" class="catalog-btn" aria-label="Перейти в каталог проектов">
+                        <i class="fas fa-folder-open"></i> Каталог проектов
+                    </a>
                 </div>
             </aside>
         </main>
@@ -1766,10 +1825,10 @@
             }
 
             // Эффект при наведении на ссылки
-            const links = document.querySelectorAll('.link-item, .email-link-item, .game-link-btn');
+            const links = document.querySelectorAll('.link-item, .email-link-item, .game-link-btn, .catalog-btn');
             links.forEach(link => {
                 link.addEventListener('mouseenter', function() {
-                    const icon = this.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt');
+                    const icon = this.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt, .fas.fa-folder-open');
                     if (icon) {
                         icon.style.transform = 'rotate(10deg) scale(1.2)';
                         icon.style.transition = 'transform 0.3s ease';
@@ -1777,7 +1836,7 @@
                 });
                 
                 link.addEventListener('mouseleave', function() {
-                    const icon = this.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt');
+                    const icon = this.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt, .fas.fa-folder-open');
                     if (icon) {
                         icon.style.transform = '';
                     }
@@ -1888,6 +1947,7 @@
                     gameChoiceText: "ПвК - Эпизод 3",
                     gameChoiceNote: "(Anily Karlene - assistant leader)",
                     gameButtonText: "More about the game here",
+                    catalogButtonText: "Projects Catalog",
                     saikono: "Saikono, when will you fix 'Tiny Bunny'?",
                     footer: "This was written by Deepseek, we'll all see Detroit: Become Human in reality someday",
                     langBtn: "RU",
@@ -1919,6 +1979,7 @@
                     gameChoiceText: "ПвК - Эпизод 3",
                     gameChoiceNote: "(Anily Karlene - помощник лидера)",
                     gameButtonText: "Подробнее о игре здесь",
+                    catalogButtonText: "Каталог проектов",
                     saikono: "Saikono, когда исправишь 'Tiny Bunny'?",
                     footer: "Это, кстати, Deepseek писал, мы все когда-нибудь увидим Detroit: Become Human в реальности",
                     langBtn: "EN",
@@ -1955,6 +2016,7 @@
                     const gameChoiceText = document.querySelector('#game-choice-text');
                     const gameChoiceNote = document.querySelector('.game-choice-section small');
                     const gameButton = document.querySelector('.game-link-btn');
+                    const catalogButton = document.querySelector('.catalog-btn');
                     const saikonoElement = document.querySelector('.saikono-message');
                     const footerElement = document.querySelector('.footer-text:last-child');
                     const copyrightElement = document.querySelector('.footer-text:first-child');
@@ -1985,6 +2047,7 @@
                     if (gameChoiceText) gameChoiceText.textContent = translations[lang].gameChoiceText;
                     if (gameChoiceNote) gameChoiceNote.textContent = translations[lang].gameChoiceNote;
                     if (gameButton) gameButton.innerHTML = `<i class="fas fa-external-link-alt"></i> ${translations[lang].gameButtonText}`;
+                    if (catalogButton) catalogButton.innerHTML = `<i class="fas fa-folder-open"></i> ${translations[lang].catalogButtonText}`;
                     if (saikonoElement) saikonoElement.textContent = translations[lang].saikono;
                     if (footerElement) footerElement.textContent = translations[lang].footer;
                     if (copyrightElement) {
