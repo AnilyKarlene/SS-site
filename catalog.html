@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singinx Studio - Projects Catalog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8a2be2;
+            --secondary-color: #4169e1;
+            --accent-color: #ff4757;
+            --dark-color: #1e1e2e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .studio-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 1500px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .studio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .studio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+            z-index: 10;
+        }
+
+        .studio-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .studio-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGM2LjYyNyAwIDEyIDUuMzczIDE2IDEycS0wIDM3MyAxMiAxMnEtMTIgNS4zNzMtMTIgMTJxLTEyLTUuMzczLTEyLTEycTUuMzczLTEyIDEyLTEyeiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvZz48L3N2Zz4=');
+            opacity: 0.1;
+        }
+
+        /* Переключатель языка */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .studio-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 0 10px;
+            word-wrap: break-word;
+        }
+
+        .studio-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+            padding: 0 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent-color) 0%, #ff7b00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .catalog-content {
+            padding: 2.5rem 1.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .catalog-content {
+                padding: 3.5rem 3rem;
+            }
+        }
+
+        .catalog-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .catalog-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .catalog-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .catalog-title i {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Сетка проектов */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 14px;
+            padding: 1.8rem;
+            transition: var(--transition);
+            border: 2px solid rgba(138, 43, 226, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .project-name {
+            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 0.3rem;
+            word-break: break-word;
+            line-height: 1.3;
+        }
+
+        .project-subtitle {
+            font-size: clamp(0.9rem, 1.3vw, 1rem);
+            color: var(--secondary-color);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .project-status {
+            font-size: clamp(0.7rem, 1vw, 0.8rem);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* Статусы проектов */
+        .status-cancelled {
+            background: linear-gradient(135deg, #757575, #424242);
+            color: white;
+        }
+
+        .status-uncertain {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+        }
+
+        .status-completed {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+        }
+
+        .status-planned {
+            background: linear-gradient(135deg, #2196F3, #0D47A1);
+            color: white;
+        }
+
+        .status-in-progress {
+            background: linear-gradient(135deg, #9C27B0, #6A1B9A);
+            color: white;
+        }
+
+        /* Метки принадлежности */
+        .affiliation-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .affiliation-our {
+            background: linear-gradient(135deg, #8a2be2, #6a11cb);
+            color: white;
+        }
+
+        .affiliation-collab {
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
+            color: white;
+        }
+
+        /* Метки сущности */
+        .entity-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .entity-game {
+            background: linear-gradient(135deg, #FF5722, #D84315);
+            color: white;
+        }
+
+        .entity-dlc {
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+            color: white;
+        }
+
+        .project-details {
+            margin: 1.2rem 0;
+            flex-grow: 1;
+        }
+
+        .project-detail {
+            display: flex;
+            margin-bottom: 0.8rem;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .project-detail-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            min-width: 160px;
+            font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+        }
+
+        .project-detail-value {
+            color: #555;
+            font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+            flex-grow: 1;
+            line-height: 1.4;
+        }
+
+        .project-detail-value .developer {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .project-detail-value .year {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .project-detail-value .orientation {
+            color: #FF5722;
+            font-weight: 600;
+        }
+
+        .project-genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .genre-tag {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            color: var(--primary-color);
+            padding: 0.4rem 0.9rem;
+            border-radius: 16px;
+            font-size: clamp(0.75rem, 1vw, 0.85rem);
+            font-weight: 600;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            transition: var(--transition);
+        }
+
+        .genre-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: auto;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(138, 43, 226, 0.1);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: clamp(0.8rem, 1vw, 0.9rem);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .project-link:hover {
+            background: white;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .project-link i {
+            font-size: 0.9em;
+        }
+
+        .project-link.disabled {
+            background: linear-gradient(135deg, #757575, #424242);
+            color: white;
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .project-link.disabled:hover {
+            transform: none;
+            background: linear-gradient(135deg, #757575, #424242);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Кнопка "Вернуться на главную" */
+        .back-to-main {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 2px solid rgba(138, 43, 226, 0.1);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: clamp(1rem, 1.3vw, 1.1rem);
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+            border-color: var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .back-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .back-btn i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* Footer */
+        .studio-footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        .footer-highlight {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Улучшенные медиа-запросы */
+        @media (max-width: 768px) {
+            .studio-header {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .catalog-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .project-detail {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            
+            .project-detail-label {
+                min-width: auto;
+            }
+            
+            .back-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .studio-header {
+                padding: 2rem 1rem;
+            }
+            
+            .catalog-content {
+                padding: 1.5rem 1rem;
+            }
+            
+            .project-card {
+                padding: 1.5rem;
+            }
+            
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .back-btn {
+                padding: 0.7rem 1.3rem;
+                font-size: 0.9rem;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .studio-title {
+                font-size: 1.8rem;
+            }
+            
+            .studio-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .catalog-title {
+                font-size: 1.3rem;
+            }
+            
+            .project-name {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article class="studio-card">
+        <header class="studio-header" role="banner">
+            <div class="language-switcher">
+                <button class="lang-btn" id="langToggle">
+                    <i class="fas fa-language"></i> EN
+                </button>
+            </div>
+            
+            <h1 class="studio-title">Singinx Studio</h1>
+            <p class="studio-subtitle">The <span class="highlight">laziest developers group</span> – where creativity meets strategic procrastination and deadlines are merely suggestions</p>
+        </header>
+        
+        <main class="catalog-content" role="main">
+            <section class="catalog-section" aria-labelledby="projects-title">
+                <h2 class="catalog-title" id="projects-title">
+                    <i class="fas fa-folder-open"></i> Projects Catalog
+                </h2>
+                
+                <div class="projects-grid">
+                    <!-- Project 1: Project ReMeow -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">Project ReMeow</h3>
+                            </div>
+                            <span class="project-status status-cancelled">Отменена</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2023 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Платформер</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Miranda Karlene</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Экшен</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://gamejolt.com/games/ReMeow/872243" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-gamepad"></i> GameJolt
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Daytime the Novel: The Game -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">Daytime the Novel: The Game</h3>
+                            </div>
+                            <span class="project-status status-uncertain">Неопределенно</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2024 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Новелла</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Miranda Karlene</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Детектив</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://gamejolt.com/games/daytime/987887" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-gamepad"></i> GameJolt
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: No Invitations / Приглашений Нет -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">No Invitations</h3>
+                                <div class="project-subtitle">Приглашений Нет</div>
+                            </div>
+                            <span class="project-status status-completed">Завершено</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2025 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Новелла</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Miranda Karlene</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Трагикомедия</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://gamejolt.com/games/NoInvitations/1016367" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-gamepad"></i> GameJolt
+                            </a>
+                            <a href="https://singinxstudio.itch.io/no-invitations" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-fire"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: DED vs %0 / Дед против деления на 0 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">DED vs %0</h3>
+                                <div class="project-subtitle">Дед против деления на 0</div>
+                            </div>
+                            <span class="project-status status-completed">Завершено</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2025 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Новелла</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Anily Karlene</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Трэш</span>
+                            <span class="genre-tag">Пародия</span>
+                            <span class="genre-tag">Комедия</span>
+                            <span class="genre-tag">Экшен</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://gamejolt.com/games/DED_vs_0/1026570" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-gamepad"></i> GameJolt
+                            </a>
+                            <a href="https://singinxstudio.itch.io/ded-vs-0" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-fire"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Неправильные / Wrong ones -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">Неправильные</h3>
+                                <div class="project-subtitle">Wrong ones</div>
+                            </div>
+                            <span class="project-status status-completed">Завершено</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2026 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Новелла</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Николай Чаяснев</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Камерная история</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://gamejolt.com/games/wrong-ones/1043964" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-gamepad"></i> GameJolt
+                            </a>
+                            <a href="https://singinxstudio.itch.io/wrong-ones" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-fire"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: DED vs %0: Director`s cut! -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">DED vs %0: Director's cut!</h3>
+                            </div>
+                            <span class="project-status status-planned">Планируется</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2026 год (?)</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-dlc">DLC</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Новелла</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Miranda Karlene</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Трэш</span>
+                            <span class="genre-tag">Пародия</span>
+                            <span class="genre-tag">Комедия</span>
+                            <span class="genre-tag">Экшен</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <span class="project-link disabled">
+                                <i class="fas fa-code"></i> В процессе разработки
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project 7: ПвК -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">ПвК</h3>
+                            </div>
+                            <span class="project-status status-in-progress">В процессе</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2025-2026 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-collab">Сотрудничество</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Славян Древнерусский</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Хоррор</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://vkplay.ru/play/game/parovozik-v-kachalkovo-2-epizod/?mt_link_id=q0amd9" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-external-link-alt"></i> VK Play
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="back-to-main">
+                <a href="index.html" class="back-btn" aria-label="Вернуться на главную страницу">
+                    <i class="fas fa-arrow-left"></i> Вернуться на главную
+                </a>
+            </div>
+        </main>
+        
+        <footer class="studio-footer" role="contentinfo">
+            <div class="footer-content">
+                <p class="footer-text">
+                    © 2021-2026 Singinx Studio. All rights reserved. 
+                    <span class="footer-highlight">The laziest developers group™</span>
+                </p>
+                <p class="footer-text">
+                    We make games... <span class="footer-highlight">eventually</span> • Procrastination is an art form • Deadlines are flexible
+                </p>
+                <p class="footer-text" style="font-size: 0.95rem; margin-top: 1rem; opacity: 0.7;">
+                    Это кстати Deepseek писал, мы все когда-то увидим Detroit: Become Human в реальности
+                </p>
+            </div>
+        </footer>
+    </article>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Заголовок без анимации печати на странице каталога
+            const studioTitle = document.querySelector('.studio-title');
+            
+            // Просто устанавливаем текст без анимации
+            if (studioTitle) {
+                studioTitle.textContent = "Singinx Studio";
+            }
+
+            // Переключатель языка (упрощенная версия для каталога)
+            const langToggle = document.getElementById('langToggle');
+            let isEnglish = true;
+            
+            const translations = {
+                en: {
+                    title: "Singinx Studio",
+                    subtitle: "The <span class='highlight'>laziest developers group</span> – where creativity meets strategic procrastination and deadlines are merely suggestions",
+                    projectsTitle: "Projects Catalog",
+                    backButton: "Back to Main",
+                    footer: "This was written by Deepseek, we'll all see Detroit: Become Human in reality someday",
+                    langBtn: "RU",
+                    copyright: "© 2021-2026 Singinx Studio. All rights reserved.",
+                    
+                    // Статусы
+                    statusCancelled: "Cancelled",
+                    statusUncertain: "Uncertain",
+                    statusCompleted: "Completed",
+                    statusPlanned: "Planned",
+                    statusInProgress: "In Progress",
+                    
+                    // Принадлежность
+                    affiliationOur: "Our Project",
+                    affiliationCollab: "Collaboration",
+                    
+                    // Сущность
+                    entityGame: "Game",
+                    entityDLC: "DLC",
+                    
+                    // Направленности
+                    orientationPlatformer: "Platformer",
+                    orientationNovel: "Novel",
+                    
+                    // Жанры
+                    genreAction: "Action",
+                    genreDetective: "Detective",
+                    genreTragicomedy: "Tragicomedy",
+                    genreTrash: "Trash",
+                    genreParody: "Parody",
+                    genreComedy: "Comedy",
+                    genreChamberStory: "Chamber Story",
+                    genreHorror: "Horror",
+                    
+                    // Метки
+                    yearLabel: "Year:",
+                    affiliationLabel: "Affiliation:",
+                    entityLabel: "Entity:",
+                    orientationLabel: "Orientation:",
+                    developerLabel: "Lead Developer:",
+                    
+                    // Ссылки
+                    inDevelopment: "In Development"
+                },
+                ru: {
+                    title: "Singinx Studio",
+                    subtitle: "Самые <span class='highlight'>ленивые разработчики</span> – где творчество встречается со стратегической прокрастинацией, а сроки – всего лишь предложения",
+                    projectsTitle: "Каталог проектов",
+                    backButton: "Вернуться на главную",
+                    footer: "Это, кстати, Deepseek писал, мы все когда-нибудь увидим Detroit: Become Human в реальности",
+                    langBtn: "EN",
+                    copyright: "© 2021-2026 Singinx Studio. Все права защищены.",
+                    
+                    // Статусы
+                    statusCancelled: "Отменена",
+                    statusUncertain: "Неопределенно",
+                    statusCompleted: "Завершено",
+                    statusPlanned: "Планируется",
+                    statusInProgress: "В процессе",
+                    
+                    // Принадлежность
+                    affiliationOur: "Наш проект",
+                    affiliationCollab: "Сотрудничество",
+                    
+                    // Сущность
+                    entityGame: "Игра",
+                    entityDLC: "DLC",
+                    
+                    // Направленности
+                    orientationPlatformer: "Платформер",
+                    orientationNovel: "Новелла",
+                    
+                    // Жанры
+                    genreAction: "Экшен",
+                    genreDetective: "Детектив",
+                    genreTragicomedy: "Трагикомедия",
+                    genreTrash: "Трэш",
+                    genreParody: "Пародия",
+                    genreComedy: "Комедия",
+                    genreChamberStory: "Камерная история",
+                    genreHorror: "Хоррор",
+                    
+                    // Метки
+                    yearLabel: "Год создания:",
+                    affiliationLabel: "Принадлежность:",
+                    entityLabel: "Сущность:",
+                    orientationLabel: "Направленность:",
+                    developerLabel: "Главный разработчик:",
+                    
+                    // Ссылки
+                    inDevelopment: "В процессе разработки"
+                }
+            };
+            
+            if (langToggle) {
+                langToggle.addEventListener('click', function() {
+                    isEnglish = !isEnglish;
+                    const lang = isEnglish ? 'en' : 'ru';
+                    
+                    const titleElement = document.querySelector('.studio-title');
+                    const subtitleElement = document.querySelector('.studio-subtitle');
+                    const projectsTitle = document.querySelector('#projects-title');
+                    const backButton = document.querySelector('.back-btn');
+                    const footerElement = document.querySelector('.footer-text:last-child');
+                    const copyrightElement = document.querySelector('.footer-text:first-child');
+                    
+                    // Обновляем основные элементы
+                    if (titleElement) titleElement.textContent = translations[lang].title;
+                    if (subtitleElement) subtitleElement.innerHTML = translations[lang].subtitle;
+                    if (projectsTitle) projectsTitle.innerHTML = `<i class="fas fa-folder-open"></i> ${translations[lang].projectsTitle}`;
+                    if (backButton) backButton.innerHTML = `<i class="fas fa-arrow-left"></i> ${translations[lang].backButton}`;
+                    if (footerElement) footerElement.textContent = translations[lang].footer;
+                    if (copyrightElement) {
+                        const yearText = lang === 'en' ? "© 2021-2026 Singinx Studio. All rights reserved." : "© 2021-2026 Singinx Studio. Все права защищены.";
+                        const highlightText = lang === 'en' ? "The laziest developers group™" : "Самые ленивые разработчики™";
+                        copyrightElement.innerHTML = `${yearText} <span class="footer-highlight">${highlightText}</span>`;
+                    }
+                    
+                    // Обновляем статусы проектов
+                    const statusElements = document.querySelectorAll('.project-status');
+                    statusElements.forEach(status => {
+                        const currentStatus = status.classList[1]; // status-cancelled, status-uncertain и т.д.
+                        let newText = '';
+                        
+                        switch(currentStatus) {
+                            case 'status-cancelled':
+                                newText = translations[lang].statusCancelled;
+                                break;
+                            case 'status-uncertain':
+                                newText = translations[lang].statusUncertain;
+                                break;
+                            case 'status-completed':
+                                newText = translations[lang].statusCompleted;
+                                break;
+                            case 'status-planned':
+                                newText = translations[lang].statusPlanned;
+                                break;
+                            case 'status-in-progress':
+                                newText = translations[lang].statusInProgress;
+                                break;
+                            default:
+                                newText = status.textContent;
+                        }
+                        
+                        status.textContent = newText;
+                    });
+                    
+                    // Обновляем метки принадлежности
+                    const affiliationTags = document.querySelectorAll('.affiliation-tag');
+                    affiliationTags.forEach(tag => {
+                        if (tag.classList.contains('affiliation-our')) {
+                            tag.textContent = translations[lang].affiliationOur;
+                        } else if (tag.classList.contains('affiliation-collab')) {
+                            tag.textContent = translations[lang].affiliationCollab;
+                        }
+                    });
+                    
+                    // Обновляем метки сущности
+                    const entityTags = document.querySelectorAll('.entity-tag');
+                    entityTags.forEach(tag => {
+                        if (tag.classList.contains('entity-game')) {
+                            tag.textContent = translations[lang].entityGame;
+                        } else if (tag.classList.contains('entity-dlc')) {
+                            tag.textContent = translations[lang].entityDLC;
+                        }
+                    });
+                    
+                    // Обновляем жанры
+                    const genreTags = document.querySelectorAll('.genre-tag');
+                    genreTags.forEach(tag => {
+                        const genreText = tag.textContent;
+                        let newGenreText = genreText;
+                        
+                        switch(genreText) {
+                            case 'Экшен':
+                            case 'Action':
+                                newGenreText = translations[lang].genreAction;
+                                break;
+                            case 'Детектив':
+                            case 'Detective':
+                                newGenreText = translations[lang].genreDetective;
+                                break;
+                            case 'Трагикомедия':
+                            case 'Tragicomedy':
+                                newGenreText = translations[lang].genreTragicomedy;
+                                break;
+                            case 'Трэш':
+                            case 'Trash':
+                                newGenreText = translations[lang].genreTrash;
+                                break;
+                            case 'Пародия':
+                            case 'Parody':
+                                newGenreText = translations[lang].genreParody;
+                                break;
+                            case 'Комедия':
+                            case 'Comedy':
+                                newGenreText = translations[lang].genreComedy;
+                                break;
+                            case 'Камерная история':
+                            case 'Chamber Story':
+                                newGenreText = translations[lang].genreChamberStory;
+                                break;
+                            case 'Хоррор':
+                            case 'Horror':
+                                newGenreText = translations[lang].genreHorror;
+                                break;
+                        }
+                        
+                        tag.textContent = newGenreText;
+                    });
+                    
+                    // Обновляем тексты направленности
+                    const orientationValues = document.querySelectorAll('.orientation');
+                    orientationValues.forEach(value => {
+                        const currentText = value.textContent;
+                        if (currentText === 'Платформер' || currentText === 'Platformer') {
+                            value.textContent = translations[lang].orientationPlatformer;
+                        } else if (currentText === 'Новелла' || currentText === 'Novel') {
+                            value.textContent = translations[lang].orientationNovel;
+                        }
+                    });
+                    
+                    // Обновляем заголовки деталей проекта
+                    const detailLabels = document.querySelectorAll('.project-detail-label');
+                    detailLabels.forEach(label => {
+                        const currentText = label.textContent;
+                        
+                        if (currentText.includes('Год создания:') || currentText.includes('Year:')) {
+                            label.textContent = translations[lang].yearLabel;
+                        } else if (currentText.includes('Принадлежность:') || currentText.includes('Affiliation:')) {
+                            label.textContent = translations[lang].affiliationLabel;
+                        } else if (currentText.includes('Сущность:') || currentText.includes('Entity:')) {
+                            label.textContent = translations[lang].entityLabel;
+                        } else if (currentText.includes('Направленность:') || currentText.includes('Orientation:')) {
+                            label.textContent = translations[lang].orientationLabel;
+                        } else if (currentText.includes('Главный разработчик:') || currentText.includes('Lead Developer:')) {
+                            label.textContent = translations[lang].developerLabel;
+                        }
+                    });
+                    
+                    // Обновляем ссылку "В процессе разработки"
+                    const devLink = document.querySelector('.project-link.disabled');
+                    if (devLink) {
+                        devLink.innerHTML = `<i class="fas fa-code"></i> ${translations[lang].inDevelopment}`;
+                    }
+                    
+                    langToggle.innerHTML = `<i class="fas fa-language"></i> ${translations[lang].langBtn}`;
+                });
+            }
+
+            // Эффект при наведении на карточки проектов
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const links = this.querySelectorAll('.project-link:not(.disabled)');
+                    links.forEach(link => {
+                        link.style.transform = 'translateY(-2px)';
+                        link.style.transition = 'transform 0.3s ease';
+                    });
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const links = this.querySelectorAll('.project-link:not(.disabled)');
+                    links.forEach(link => {
+                        link.style.transform = '';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
