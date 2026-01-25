@@ -22,6 +22,10 @@
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             --transition: all 0.3s ease;
             --border-radius: 16px;
+            --search-bg: #ffffff;
+            --search-border: rgba(138, 43, 226, 0.15);
+            --archive-color: #4CAF50;
+            --archive-color-dark: #2E7D32;
         }
 
         body {
@@ -151,6 +155,179 @@
             }
         }
 
+        /* Блок поиска */
+        .search-section {
+            margin-bottom: 3rem;
+            background: var(--search-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--search-border);
+        }
+
+        .search-title {
+            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-title i {
+            color: var(--secondary-color);
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .search-container {
+                flex-direction: row;
+                align-items: flex-end;
+            }
+        }
+
+        .search-group {
+            flex: 1;
+        }
+
+        .search-label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: white;
+            color: var(--text-color);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #888;
+        }
+
+        .search-type-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .search-type-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .search-type-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .search-results-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0f4ff 100%);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            display: none;
+        }
+
+        .search-results-info.active {
+            display: block;
+        }
+
+        .search-results-text {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .clear-search-btn {
+            margin-left: 1rem;
+            padding: 0.4rem 0.9rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .clear-search-btn:hover {
+            background: #ff2e43;
+            transform: translateY(-1px);
+        }
+
+        .tags-filter-container {
+            margin-top: 2rem;
+        }
+
+        .tags-filter-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tags-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .tag-filter-btn {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            color: var(--primary-color);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tag-filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: var(--primary-color);
+        }
+
         .catalog-section {
             margin-bottom: 2.5rem;
         }
@@ -224,6 +401,10 @@
             transform: translateY(-5px);
             border-color: var(--primary-color);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card.hidden {
+            display: none;
         }
 
         .project-header {
@@ -327,6 +508,26 @@
         .entity-dlc {
             background: linear-gradient(135deg, #E91E63, #C2185B);
             color: white;
+        }
+
+        /* Примечания к проектам */
+        .project-note {
+            margin: 1rem 0;
+            padding: 0.7rem 1rem;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+            font-size: 0.85rem;
+            color: #5d4037;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-note i {
+            color: #ff9800;
+            font-size: 0.9rem;
         }
 
         .project-details {
@@ -444,6 +645,128 @@
             border-color: transparent;
         }
 
+        /* Общее примечание */
+        .general-note {
+            margin: 3rem 0 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #e8f4fd 0%, #d1e9ff 100%);
+            border-radius: 12px;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .general-note-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .general-note-title i {
+            font-size: 1.1rem;
+        }
+
+        .general-note-content {
+            color: #2c3e50;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .general-note-highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Кнопка архива */
+        .archive-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f0fff4 0%, #e8f5e9 100%);
+            border-radius: 16px;
+            border: 2px solid rgba(76, 175, 80, 0.2);
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .archive-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--archive-color), var(--archive-color-dark));
+            z-index: 1;
+        }
+
+        .archive-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--archive-color-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .archive-title i {
+            font-size: 1.3rem;
+            color: var(--archive-color);
+        }
+
+        .archive-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--archive-color), var(--archive-color-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .archive-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            border-color: var(--archive-color-dark);
+            background: white;
+            color: var(--archive-color-dark);
+        }
+
+        .archive-btn:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .archive-btn i {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .archive-btn:hover i {
+            transform: translateY(-2px);
+        }
+
+        .archive-size {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
         /* Кнопка "Вернуться на главную" */
         .back-to-main {
             text-align: center;
@@ -528,6 +851,10 @@
                 padding: 2rem 1.5rem;
             }
             
+            .search-section {
+                padding: 1.5rem;
+            }
+            
             .project-detail {
                 flex-direction: column;
                 gap: 0.3rem;
@@ -541,6 +868,21 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 0.95rem;
             }
+            
+            .general-note {
+                padding: 1.2rem;
+                margin: 2.5rem 0 1.5rem;
+            }
+            
+            .archive-section {
+                padding: 1.5rem;
+                margin: 2.5rem 0;
+            }
+            
+            .archive-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -550,6 +892,10 @@
             
             .catalog-content {
                 padding: 1.5rem 1rem;
+            }
+            
+            .search-section {
+                padding: 1.2rem;
             }
             
             .project-card {
@@ -571,6 +917,27 @@
                 font-size: 0.9rem;
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .general-note {
+                padding: 1rem;
+                margin: 2rem 0 1rem;
+            }
+            
+            .archive-section {
+                padding: 1.2rem;
+                margin: 2rem 0;
+            }
+            
+            .archive-btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .archive-title {
+                font-size: 1.3rem;
             }
         }
 
@@ -607,14 +974,132 @@
         </header>
         
         <main class="catalog-content" role="main">
+            <!-- Блок поиска -->
+            <section class="search-section" aria-labelledby="search-title">
+                <h2 class="search-title" id="search-title">
+                    <i class="fas fa-search"></i> Поиск проектов
+                </h2>
+                
+                <div class="search-container">
+                    <div class="search-group">
+                        <label for="generalSearch" class="search-label">Поиск по названию, году или разработчику:</label>
+                        <input type="text" 
+                               id="generalSearch" 
+                               class="search-input" 
+                               placeholder="Начните вводить название проекта, год или имя разработчика..."
+                               aria-label="Поле поиска проектов">
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="tagSearch" class="search-label">Поиск по меткам:</label>
+                        <input type="text" 
+                               id="tagSearch" 
+                               class="search-input" 
+                               placeholder="Введите жанр, статус или тип проекта..."
+                               aria-label="Поле поиска по меткам">
+                    </div>
+                </div>
+                
+                <div class="search-type-selector">
+                    <label class="search-type-label">
+                        <input type="checkbox" class="search-type-checkbox" id="searchInTitle" checked>
+                        Искать в названиях
+                    </label>
+                    <label class="search-type-label">
+                        <input type="checkbox" class="search-type-checkbox" id="searchInTags" checked>
+                        Искать в метках
+                    </label>
+                    <label class="search-type-label">
+                        <input type="checkbox" class="search-type-checkbox" id="searchInYear" checked>
+                        Искать по году
+                    </label>
+                    <label class="search-type-label">
+                        <input type="checkbox" class="search-type-checkbox" id="searchInDeveloper" checked>
+                        Искать по разработчику
+                    </label>
+                </div>
+                
+                <div class="tags-filter-container">
+                    <h3 class="tags-filter-title">
+                        <i class="fas fa-tags"></i> Быстрый выбор меток:
+                    </h3>
+                    <div class="tags-filter" id="tagsFilter">
+                        <!-- Теги будут добавляться динамически -->
+                    </div>
+                </div>
+                
+                <div class="search-results-info" id="searchResultsInfo">
+                    <span class="search-results-text" id="resultsText">Найдено проектов: 8</span>
+                    <button class="clear-search-btn" id="clearSearchBtn">Очистить поиск</button>
+                </div>
+            </section>
+            
             <section class="catalog-section" aria-labelledby="projects-title">
                 <h2 class="catalog-title" id="projects-title">
                     <i class="fas fa-folder-open"></i> Projects Catalog
                 </h2>
                 
                 <div class="projects-grid">
-                    <!-- Project 1: Project ReMeow -->
-                    <div class="project-card">
+                    <!-- Project 1: New Kaizo Syobon -->
+                    <div class="project-card" data-search="New Kaizo Syobon 2022-2023 Miranda Karlene платформер экшен status-completed наш проект игра">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-name">New Kaizo Syobon</h3>
+                            </div>
+                            <span class="project-status status-completed">Завершено</span>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="project-detail">
+                                <span class="project-detail-label">Год создания:</span>
+                                <span class="project-detail-value"><span class="year">2022-2023 год</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Принадлежность:</span>
+                                <span class="project-detail-value">
+                                    <span class="affiliation-tag affiliation-our">Наш проект</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Сущность:</span>
+                                <span class="project-detail-value">
+                                    <span class="entity-tag entity-game">Игра</span>
+                                </span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Направленность:</span>
+                                <span class="project-detail-value"><span class="orientation">Платформер</span></span>
+                            </div>
+                            
+                            <div class="project-detail">
+                                <span class="project-detail-label">Главный разработчик:</span>
+                                <span class="project-detail-value"><span class="developer">Miranda Karlene</span> (единственный)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-note" data-note="kaizo-local">
+                            <i class="fas fa-info-circle"></i> Создана для локального комьюнити
+                        </div>
+                        
+                        <div class="project-genres">
+                            <span class="genre-tag">Экшен</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://gamejolt.com/games/KaizoSyobon/782122" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="project-link">
+                                <i class="fas fa-gamepad"></i> GameJolt
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Project ReMeow -->
+                    <div class="project-card" data-search="Project ReMeow 2023 Miranda Karlene платформер экшен status-cancelled наш проект игра">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">Project ReMeow</h3>
@@ -667,8 +1152,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 2: Daytime the Novel: The Game -->
-                    <div class="project-card">
+                    <!-- Project 3: Daytime the Novel: The Game -->
+                    <div class="project-card" data-search="Daytime the Novel: The Game 2024 Miranda Karlene новелла детектив status-uncertain наш проект игра">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">Daytime the Novel: The Game</h3>
@@ -721,8 +1206,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 3: No Invitations / Приглашений Нет -->
-                    <div class="project-card">
+                    <!-- Project 4: No Invitations / Приглашений Нет -->
+                    <div class="project-card" data-search="No Invitations Приглашений Нет 2025 Miranda Karlene новелла трагикомедия status-completed наш проект игра">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">No Invitations</h3>
@@ -762,6 +1247,10 @@
                             </div>
                         </div>
                         
+                        <div class="project-note" data-note="no-invitations">
+                            <i class="fas fa-info-circle"></i> Создана в рамках Джема Ста Цветов 2
+                        </div>
+                        
                         <div class="project-genres">
                             <span class="genre-tag">Трагикомедия</span>
                         </div>
@@ -782,8 +1271,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 4: DED vs %0 / Дед против деления на 0 -->
-                    <div class="project-card">
+                    <!-- Project 5: DED vs %0 / Дед против деления на 0 -->
+                    <div class="project-card" data-search="DED vs %0 Дед против деления на 0 2025 Anily Karlene новелла трэш пародия комедия экшен status-completed наш проект игра">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">DED vs %0</h3>
@@ -823,6 +1312,10 @@
                             </div>
                         </div>
                         
+                        <div class="project-note" data-note="ded-jam">
+                            <i class="fas fa-info-circle"></i> Создана в рамках DED JAM 2
+                        </div>
+                        
                         <div class="project-genres">
                             <span class="genre-tag">Трэш</span>
                             <span class="genre-tag">Пародия</span>
@@ -846,8 +1339,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 5: Неправильные / Wrong ones -->
-                    <div class="project-card">
+                    <!-- Project 6: Неправильные / Wrong ones -->
+                    <div class="project-card" data-search="Неправильные Wrong ones 2026 Николай Чаяснев новелла камерная история status-completed наш проект игра">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">Неправильные</h3>
@@ -887,6 +1380,10 @@
                             </div>
                         </div>
                         
+                        <div class="project-note" data-note="cappella-jam">
+                            <i class="fas fa-info-circle"></i> Создана в рамках Капелла джем 3
+                        </div>
+                        
                         <div class="project-genres">
                             <span class="genre-tag">Камерная история</span>
                         </div>
@@ -907,8 +1404,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 6: DED vs %0: Director`s cut! -->
-                    <div class="project-card">
+                    <!-- Project 7: DED vs %0: Director`s cut! -->
+                    <div class="project-card" data-search="DED vs %0: Director's cut! 2026 Miranda Karlene новелла трэш пародия комедия экшен status-planned наш проект dlc">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">DED vs %0: Director's cut!</h3>
@@ -961,8 +1458,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 7: ПвК -->
-                    <div class="project-card">
+                    <!-- Project 8: ПвК -->
+                    <div class="project-card" data-search="ПвК 2025-2026 Славян Древнерусский хоррор status-in-progress сотрудничество игра">
                         <div class="project-header">
                             <div>
                                 <h3 class="project-name">ПвК</h3>
@@ -1012,6 +1509,33 @@
                 </div>
             </section>
 
+            <!-- Общее примечание -->
+            <div class="general-note">
+                <h3 class="general-note-title">
+                    <i class="fas fa-exclamation-circle"></i> Важное примечание
+                </h3>
+                <div class="general-note-content">
+                    В данном списке представлены только <span class="general-note-highlight">оригинальные проекты Singinx Studio</span>. 
+                    Здесь не упоминаются модификации для чужих проектов, текстовые произведения (фанфики, статьи и т.д.), 
+                    а также другие вспомогательные материалы. Единственное исключение - архив о событиях вселенной Dejected Kingdom, 
+                    которую можно изучить подробнее ниже.
+                </div>
+            </div>
+
+            <!-- Кнопка архива -->
+            <div class="archive-section">
+                <h2 class="archive-title">
+                    <i class="fas fa-archive"></i> Дополнительные материалы
+                </h2>
+                <a href="https://www.dropbox.com/scl/fi/y69nwqu7uwdx7j44x2aso/Lifeline-Daytime.zip?rlkey=xorv1za756qpex5oowouiqxoj&st=es1wueai&dl=0" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="archive-btn">
+                    <i class="fas fa-file-archive"></i> Архив с лором :0
+                </a>
+                <p class="archive-size">ZIP архив • Dropbox</p>
+            </div>
+
             <div class="back-to-main">
                 <a href="index.html" class="back-btn" aria-label="Вернуться на главную страницу">
                     <i class="fas fa-arrow-left"></i> Вернуться на главную
@@ -1058,6 +1582,33 @@
                     footer: "This was written by Deepseek, we'll all see Detroit: Become Human in reality someday",
                     langBtn: "RU",
                     copyright: "© 2021-2026 Singinx Studio. All rights reserved.",
+                    
+                    // Поиск
+                    searchTitle: "Project Search",
+                    searchPlaceholder: "Start typing project name, year or developer name...",
+                    tagSearchPlaceholder: "Enter genre, status or project type...",
+                    searchInTitles: "Search in titles",
+                    searchInTags: "Search in tags",
+                    searchInYear: "Search by year",
+                    searchInDeveloper: "Search by developer",
+                    quickTags: "Quick tag selection:",
+                    resultsFound: "Projects found:",
+                    clearSearch: "Clear search",
+                    
+                    // Примечания к проектам
+                    noteKaizoLocal: "Created for the local community",
+                    noteNoInvitations: "Created as part of the 100 Flowers Jam 2",
+                    noteDEDvs0: "Created as part of DED JAM 2",
+                    noteWrongOnes: "Created as part of Cappella Jam 3",
+                    
+                    // Общее примечание
+                    generalNoteTitle: "Important Note",
+                    generalNoteContent: "This list includes only <span class='general-note-highlight'>original projects by Singinx Studio</span>. Modifications for others' projects, text works (fan fiction, articles, etc.), and other auxiliary materials are not mentioned here. The only exception is the archive about the events of the Dejected Kingdom universe, which can be studied in more detail below.",
+                    
+                    // Архив
+                    archiveTitle: "Additional Materials",
+                    archiveButton: "Lore Archive :0",
+                    archiveSize: "ZIP Archive • Dropbox",
                     
                     // Статусы
                     statusCancelled: "Cancelled",
@@ -1107,6 +1658,33 @@
                     langBtn: "EN",
                     copyright: "© 2021-2026 Singinx Studio. Все права защищены.",
                     
+                    // Поиск
+                    searchTitle: "Поиск проектов",
+                    searchPlaceholder: "Начните вводить название проекта, год или имя разработчика...",
+                    tagSearchPlaceholder: "Введите жанр, статус или тип проекта...",
+                    searchInTitles: "Искать в названиях",
+                    searchInTags: "Искать в метках",
+                    searchInYear: "Искать по году",
+                    searchInDeveloper: "Искать по разработчику",
+                    quickTags: "Быстрый выбор меток:",
+                    resultsFound: "Найдено проектов:",
+                    clearSearch: "Очистить поиск",
+                    
+                    // Примечания к проектам
+                    noteKaizoLocal: "Создана для локального комьюнити",
+                    noteNoInvitations: "Создана в рамках Джема Ста Цветов 2",
+                    noteDEDvs0: "Создана в рамках DED JAM 2",
+                    noteWrongOnes: "Создана в рамках Капелла джем 3",
+                    
+                    // Общее примечание
+                    generalNoteTitle: "Важное примечание",
+                    generalNoteContent: "В данном списке представлены только <span class='general-note-highlight'>оригинальные проекты Singinx Studio</span>. Здесь не упоминаются модификации для чужих проектов, текстовые произведения (фанфики, статьи и т.д.), а также другие вспомогательные материалы. Единственное исключение - архив о событиях вселенной Dejected Kingdom, которую можно изучить подробнее ниже.",
+                    
+                    // Архив
+                    archiveTitle: "Дополнительные материалы",
+                    archiveButton: "Архив с лором :0",
+                    archiveSize: "ZIP архив • Dropbox",
+                    
                     // Статусы
                     statusCancelled: "Отменена",
                     statusUncertain: "Неопределенно",
@@ -1148,6 +1726,9 @@
                 }
             };
             
+            // Инициализация поиска
+            initSearch();
+            
             if (langToggle) {
                 langToggle.addEventListener('click', function() {
                     isEnglish = !isEnglish;
@@ -1171,6 +1752,60 @@
                         const highlightText = lang === 'en' ? "The laziest developers group™" : "Самые ленивые разработчики™";
                         copyrightElement.innerHTML = `${yearText} <span class="footer-highlight">${highlightText}</span>`;
                     }
+                    
+                    // Обновляем поисковую секцию
+                    const searchTitle = document.querySelector('#search-title');
+                    const generalSearch = document.querySelector('#generalSearch');
+                    const tagSearch = document.querySelector('#tagSearch');
+                    const searchInTitleLabel = document.querySelector('label[for="searchInTitle"]');
+                    const searchInTagsLabel = document.querySelector('label[for="searchInTags"]');
+                    const searchInYearLabel = document.querySelector('label[for="searchInYear"]');
+                    const searchInDeveloperLabel = document.querySelector('label[for="searchInDeveloper"]');
+                    const tagsFilterTitle = document.querySelector('.tags-filter-title');
+                    const resultsText = document.querySelector('#resultsText');
+                    const clearSearchBtn = document.querySelector('#clearSearchBtn');
+                    
+                    if (searchTitle) searchTitle.innerHTML = `<i class="fas fa-search"></i> ${translations[lang].searchTitle}`;
+                    if (generalSearch) generalSearch.placeholder = translations[lang].searchPlaceholder;
+                    if (tagSearch) tagSearch.placeholder = translations[lang].tagSearchPlaceholder;
+                    if (searchInTitleLabel) searchInTitleLabel.textContent = translations[lang].searchInTitles;
+                    if (searchInTagsLabel) searchInTagsLabel.textContent = translations[lang].searchInTags;
+                    if (searchInYearLabel) searchInYearLabel.textContent = translations[lang].searchInYear;
+                    if (searchInDeveloperLabel) searchInDeveloperLabel.textContent = translations[lang].searchInDeveloper;
+                    if (tagsFilterTitle) tagsFilterTitle.innerHTML = `<i class="fas fa-tags"></i> ${translations[lang].quickTags}`;
+                    if (clearSearchBtn) clearSearchBtn.textContent = translations[lang].clearSearch;
+                    
+                    // Обновляем общее примечание
+                    const generalNoteTitle = document.querySelector('.general-note-title');
+                    const generalNoteContent = document.querySelector('.general-note-content');
+                    
+                    if (generalNoteTitle) {
+                        generalNoteTitle.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${translations[lang].generalNoteTitle}`;
+                    }
+                    if (generalNoteContent) {
+                        generalNoteContent.innerHTML = translations[lang].generalNoteContent;
+                    }
+                    
+                    // Обновляем архив
+                    const archiveTitle = document.querySelector('.archive-title');
+                    const archiveButton = document.querySelector('.archive-btn');
+                    const archiveSize = document.querySelector('.archive-size');
+                    
+                    if (archiveTitle) {
+                        archiveTitle.innerHTML = `<i class="fas fa-archive"></i> ${translations[lang].archiveTitle}`;
+                    }
+                    if (archiveButton) {
+                        archiveButton.innerHTML = `<i class="fas fa-file-archive"></i> ${translations[lang].archiveButton}`;
+                    }
+                    if (archiveSize) {
+                        archiveSize.textContent = translations[lang].archiveSize;
+                    }
+                    
+                    // Обновляем результаты поиска
+                    updateSearchResultsText();
+                    
+                    // Обновляем метки фильтров
+                    updateFilterTags(lang);
                     
                     // Обновляем статусы проектов
                     const statusElements = document.querySelectorAll('.project-status');
@@ -1294,6 +1929,32 @@
                         }
                     });
                     
+                    // Обновляем примечания к проектам
+                    const noteElements = document.querySelectorAll('.project-note');
+                    noteElements.forEach(note => {
+                        const noteType = note.getAttribute('data-note');
+                        let newText = '';
+                        
+                        switch(noteType) {
+                            case 'kaizo-local':
+                                newText = translations[lang].noteKaizoLocal;
+                                break;
+                            case 'no-invitations':
+                                newText = translations[lang].noteNoInvitations;
+                                break;
+                            case 'ded-jam':
+                                newText = translations[lang].noteDEDvs0;
+                                break;
+                            case 'cappella-jam':
+                                newText = translations[lang].noteWrongOnes;
+                                break;
+                        }
+                        
+                        if (newText) {
+                            note.innerHTML = `<i class="fas fa-info-circle"></i> ${newText}`;
+                        }
+                    });
+                    
                     // Обновляем ссылку "В процессе разработки"
                     const devLink = document.querySelector('.project-link.disabled');
                     if (devLink) {
@@ -1322,6 +1983,267 @@
                     });
                 });
             });
+            
+            // Функции поиска
+            function initSearch() {
+                const generalSearch = document.getElementById('generalSearch');
+                const tagSearch = document.getElementById('tagSearch');
+                const clearSearchBtn = document.getElementById('clearSearchBtn');
+                const searchCheckboxes = document.querySelectorAll('.search-type-checkbox');
+                const tagsFilterContainer = document.getElementById('tagsFilter');
+                
+                // Создаем фильтры по тегам
+                createTagFilters();
+                
+                // Обработчики событий поиска
+                if (generalSearch) {
+                    generalSearch.addEventListener('input', performSearch);
+                }
+                
+                if (tagSearch) {
+                    tagSearch.addEventListener('input', performSearch);
+                }
+                
+                if (clearSearchBtn) {
+                    clearSearchBtn.addEventListener('click', clearSearch);
+                }
+                
+                searchCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', performSearch);
+                });
+                
+                // Первоначальное обновление текста результатов
+                updateSearchResultsText();
+            }
+            
+            function createTagFilters() {
+                const tagsFilterContainer = document.getElementById('tagsFilter');
+                if (!tagsFilterContainer) return;
+                
+                const tags = [
+                    { text: 'Экшен', type: 'genre' },
+                    { text: 'Детектив', type: 'genre' },
+                    { text: 'Трагикомедия', type: 'genre' },
+                    { text: 'Трэш', type: 'genre' },
+                    { text: 'Пародия', type: 'genre' },
+                    { text: 'Комедия', type: 'genre' },
+                    { text: 'Камерная история', type: 'genre' },
+                    { text: 'Хоррор', type: 'genre' },
+                    { text: 'Завершено', type: 'status' },
+                    { text: 'В процессе', type: 'status' },
+                    { text: 'Планируется', type: 'status' },
+                    { text: 'Отменена', type: 'status' },
+                    { text: 'Неопределенно', type: 'status' },
+                    { text: 'Наш проект', type: 'affiliation' },
+                    { text: 'Сотрудничество', type: 'affiliation' },
+                    { text: 'Игра', type: 'entity' },
+                    { text: 'DLC', type: 'entity' },
+                    { text: '2022-2023', type: 'year' },
+                    { text: '2023', type: 'year' },
+                    { text: '2024', type: 'year' },
+                    { text: '2025', type: 'year' },
+                    { text: '2026', type: 'year' }
+                ];
+                
+                tags.forEach(tag => {
+                    const button = document.createElement('button');
+                    button.className = 'tag-filter-btn';
+                    button.textContent = tag.text;
+                    button.setAttribute('data-tag', tag.text.toLowerCase());
+                    button.setAttribute('data-type', tag.type);
+                    
+                    button.addEventListener('click', function() {
+                        this.classList.toggle('active');
+                        performSearch();
+                    });
+                    
+                    tagsFilterContainer.appendChild(button);
+                });
+            }
+            
+            function updateFilterTags(lang) {
+                const tagButtons = document.querySelectorAll('.tag-filter-btn');
+                const currentLang = lang || (isEnglish ? 'en' : 'ru');
+                
+                tagButtons.forEach(button => {
+                    const originalText = button.getAttribute('data-tag');
+                    let newText = originalText;
+                    
+                    // Переводим текст кнопки, если нужно
+                    if (currentLang === 'en') {
+                        switch(originalText) {
+                            case 'экшен': newText = 'action'; break;
+                            case 'детектив': newText = 'detective'; break;
+                            case 'трагикомедия': newText = 'tragicomedy'; break;
+                            case 'трэш': newText = 'trash'; break;
+                            case 'пародия': newText = 'parody'; break;
+                            case 'комедия': newText = 'comedy'; break;
+                            case 'камерная история': newText = 'chamber story'; break;
+                            case 'хоррор': newText = 'horror'; break;
+                            case 'завершено': newText = 'completed'; break;
+                            case 'в процессе': newText = 'in progress'; break;
+                            case 'планируется': newText = 'planned'; break;
+                            case 'отменена': newText = 'cancelled'; break;
+                            case 'неопределенно': newText = 'uncertain'; break;
+                            case 'наш проект': newText = 'our project'; break;
+                            case 'сотрудничество': newText = 'collaboration'; break;
+                            case 'игра': newText = 'game'; break;
+                            case 'dlc': newText = 'dlc'; break;
+                        }
+                    } else {
+                        switch(originalText) {
+                            case 'action': newText = 'экшен'; break;
+                            case 'detective': newText = 'детектив'; break;
+                            case 'tragicomedy': newText = 'трагикомедия'; break;
+                            case 'trash': newText = 'трэш'; break;
+                            case 'parody': newText = 'пародия'; break;
+                            case 'comedy': newText = 'комедия'; break;
+                            case 'chamber story': newText = 'камерная история'; break;
+                            case 'horror': newText = 'хоррор'; break;
+                            case 'completed': newText = 'завершено'; break;
+                            case 'in progress': newText = 'в процессе'; break;
+                            case 'planned': newText = 'планируется'; break;
+                            case 'cancelled': newText = 'отменена'; break;
+                            case 'uncertain': newText = 'неопределенно'; break;
+                            case 'our project': newText = 'наш проект'; break;
+                            case 'collaboration': newText = 'сотрудничество'; break;
+                            case 'game': newText = 'игра'; break;
+                            case 'dlc': newText = 'dlc'; break;
+                        }
+                    }
+                    
+                    // Обновляем текст кнопки, сохраняя регистр оригинала
+                    if (originalText === originalText.toUpperCase()) {
+                        button.textContent = newText.toUpperCase();
+                    } else if (originalText === originalText.toLowerCase()) {
+                        button.textContent = newText.toLowerCase();
+                    } else {
+                        // Сохраняем регистр (первая буква заглавная)
+                        button.textContent = newText.charAt(0).toUpperCase() + newText.slice(1);
+                    }
+                });
+            }
+            
+            function performSearch() {
+                const generalSearch = document.getElementById('generalSearch').value.toLowerCase();
+                const tagSearch = document.getElementById('tagSearch').value.toLowerCase();
+                const searchInTitle = document.getElementById('searchInTitle').checked;
+                const searchInTags = document.getElementById('searchInTags').checked;
+                const searchInYear = document.getElementById('searchInYear').checked;
+                const searchInDeveloper = document.getElementById('searchInDeveloper').checked;
+                
+                const activeTagButtons = document.querySelectorAll('.tag-filter-btn.active');
+                const activeTags = Array.from(activeTagButtons).map(btn => btn.textContent.toLowerCase());
+                
+                const projectCards = document.querySelectorAll('.project-card');
+                let visibleCount = 0;
+                
+                projectCards.forEach(card => {
+                    const searchData = card.getAttribute('data-search').toLowerCase();
+                    let matchesGeneral = false;
+                    let matchesTagSearch = false;
+                    let matchesActiveTags = true;
+                    
+                    // Проверка общего поиска
+                    if (generalSearch) {
+                        // Проверяем разные типы поиска в зависимости от выбранных чекбоксов
+                        let searchText = '';
+                        
+                        if (searchInTitle) {
+                            const projectName = card.querySelector('.project-name').textContent.toLowerCase();
+                            const projectSubtitle = card.querySelector('.project-subtitle') ? card.querySelector('.project-subtitle').textContent.toLowerCase() : '';
+                            searchText += projectName + ' ' + projectSubtitle + ' ';
+                        }
+                        
+                        if (searchInTags) {
+                            const tags = card.querySelectorAll('.genre-tag, .project-status, .affiliation-tag, .entity-tag');
+                            tags.forEach(tag => {
+                                searchText += tag.textContent.toLowerCase() + ' ';
+                            });
+                        }
+                        
+                        if (searchInYear) {
+                            const yearElement = card.querySelector('.year');
+                            if (yearElement) {
+                                searchText += yearElement.textContent.toLowerCase() + ' ';
+                            }
+                        }
+                        
+                        if (searchInDeveloper) {
+                            const developerElement = card.querySelector('.developer');
+                            if (developerElement) {
+                                searchText += developerElement.textContent.toLowerCase() + ' ';
+                            }
+                        }
+                        
+                        matchesGeneral = searchText.includes(generalSearch);
+                    } else {
+                        matchesGeneral = true; // Если поле поиска пустое, считаем что совпадает
+                    }
+                    
+                    // Проверка поиска по тегам
+                    if (tagSearch) {
+                        matchesTagSearch = searchData.includes(tagSearch);
+                    } else {
+                        matchesTagSearch = true;
+                    }
+                    
+                    // Проверка активных тегов-фильтров
+                    if (activeTags.length > 0) {
+                        // Проверяем, содержит ли карточка все активные теги
+                        for (let tag of activeTags) {
+                            if (!searchData.includes(tag)) {
+                                matchesActiveTags = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Показываем карточку, если она соответствует всем критериям
+                    if (matchesGeneral && matchesTagSearch && matchesActiveTags) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Обновляем информацию о результатах
+                updateSearchResultsText(visibleCount);
+            }
+            
+            function updateSearchResultsText(visibleCount) {
+                const resultsInfo = document.getElementById('searchResultsInfo');
+                const resultsText = document.getElementById('resultsText');
+                const totalCards = document.querySelectorAll('.project-card').length;
+                
+                if (visibleCount === undefined) {
+                    visibleCount = totalCards;
+                }
+                
+                const currentLang = isEnglish ? 'en' : 'ru';
+                const totalText = currentLang === 'en' ? 'Total projects:' : 'Всего проектов:';
+                const foundText = currentLang === 'en' ? 'Found:' : 'Найдено:';
+                
+                if (visibleCount < totalCards) {
+                    resultsInfo.classList.add('active');
+                    resultsText.textContent = `${foundText} ${visibleCount} / ${totalText} ${totalCards}`;
+                } else {
+                    resultsInfo.classList.remove('active');
+                }
+            }
+            
+            function clearSearch() {
+                document.getElementById('generalSearch').value = '';
+                document.getElementById('tagSearch').value = '';
+                
+                // Сбрасываем активные теги
+                const activeTagButtons = document.querySelectorAll('.tag-filter-btn.active');
+                activeTagButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Выполняем поиск (который покажет все карточки)
+                performSearch();
+            }
         });
     </script>
 </body>
