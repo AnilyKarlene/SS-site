@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Принципы разработки у Миры - Singinx Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8a2be2;
+            --secondary-color: #4169e1;
+            --accent-color: #ff4757;
+            --dark-color: #1e1e2e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+            --principle-color: #9C27B0;
+            --principle-bg: #f3e5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .studio-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 1500px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .studio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .studio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+            z-index: 10;
+        }
+
+        /* ===== ШАПКА ===== */
+        .studio-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .studio-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGM2LjYyNyAwIDEyIDUuMzczIDEyIDEycy01LjM3MyAxMi0xMiAxMi0xMi01LjM3My0xMi0xMiA1LjM3My0xMiAxMi0xMnoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L2c+PC9zdmc+');
+            opacity: 0.1;
+        }
+
+        /* Переключатель языка */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .studio-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 0 10px;
+            word-wrap: break-word;
+        }
+
+        .studio-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+            padding: 0 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent-color) 0%, #ff7b00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+        .studio-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2.5rem 1.5rem;
+            min-height: 400px;
+        }
+
+        @media (min-width: 992px) {
+            .studio-content {
+                grid-template-columns: 2.5fr 1fr;
+                gap: 2.5rem;
+                padding: 3.5rem 3rem;
+            }
+        }
+
+        /* Основной контент */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, var(--principle-bg) 0%, #f8f4ff 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            border-left: 5px solid var(--principle-color);
+            margin-bottom: 1rem;
+        }
+
+        .intro-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--principle-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .intro-title i {
+            font-size: 1.3rem;
+        }
+
+        .intro-text {
+            color: #4a148c;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Список принципов */
+        .principles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .principle-item {
+            background: white;
+            border-radius: 14px;
+            padding: 1.8rem;
+            border: 2px solid rgba(156, 39, 176, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--principle-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .principle-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--principle-color), #7b1fa2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(156, 39, 176, 0.3);
+        }
+
+        .principle-content {
+            padding-left: 0.5rem;
+        }
+
+        .principle-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--principle-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .principle-title i {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .principle-description {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Боковая панель */
+        .sidebar {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            border: 2px solid rgba(138, 43, 226, 0.1);
+            height: fit-content;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .studio-footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        .footer-highlight {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Ссылки в боковой панели */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.2rem;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 0.8rem;
+        }
+        
+        .sidebar-link:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-link i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .sidebar-link.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .sidebar-link.active i {
+            color: white;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 768px) {
+            .studio-header {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .studio-content {
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+            
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .principle-item {
+                padding: 1.5rem;
+            }
+            
+            .intro-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .studio-header {
+                padding: 2rem 1rem;
+            }
+            
+            .studio-content {
+                padding: 1.5rem 1rem;
+            }
+            
+            .sidebar {
+                padding: 1.2rem;
+            }
+            
+            .principle-item {
+                padding: 1.2rem;
+            }
+            
+            .principle-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .principle-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .studio-title {
+                font-size: 1.8rem;
+            }
+            
+            .studio-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .intro-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article class="studio-card">
+        <header class="studio-header" role="banner">
+            <div class="language-switcher">
+                <button class="lang-btn" id="langToggle">
+                    <i class="fas fa-language"></i> RU
+                </button>
+            </div>
+            
+            <h1 class="studio-title">Singinx Studio</h1>
+            <p class="studio-subtitle">The <span class="highlight">laziest developers group</span> – where creativity meets strategic procrastination and deadlines are merely suggestions</p>
+        </header>
+        
+        <main class="studio-content" role="main">
+            <div class="main-content">
+                <!-- Введение -->
+                <section class="intro-section" aria-labelledby="intro-title">
+                    <h2 class="intro-title" id="intro-title">
+                        <i class="fas fa-lightbulb"></i> Что это такое?
+                    </h2>
+                    <p class="intro-text">
+                        Это не манифест и не свод законов. Просто наблюдения, которые накопились за время 
+                        создания игр и общения с коллегами. Никакого пафоса или попыток казаться умнее, 
+                        чем есть на самом деле. Просто рабочие заметки, которые помогают не наступать на те же грабли.
+                    </p>
+                </section>
+                
+                <!-- Список принципов -->
+                <section class="principles-list" aria-labelledby="principles-title">
+                    <h2 class="section-title" id="principles-title" style="margin-bottom: 1.5rem;">
+                        <i class="fas fa-list-check"></i> Список наблюдений
+                    </h2>
+                    
+                    <!-- Принцип 1 -->
+                    <article class="principle-item">
+                        <div class="principle-number">1</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-paint-brush"></i> Лично моё творчество свободно от коммерции
+                            </h3>
+                            <p class="principle-description">
+                                Когда делаешь что-то для денег, это работа. Когда делаешь для души, это творчество. 
+                                Я стараюсь разделять эти два потока. Коммерческие проекты имеют свои правила, 
+                                а личные живут по своим.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 2 -->
+                    <article class="principle-item">
+                        <div class="principle-number">2</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-users"></i> Для автора нужен видимый читатель или игрок
+                            </h3>
+                            <p class="principle-description">
+                                Создавать в вакууме тяжело. Даже если аудитория небольшая, важно знать, 
+                                что кто-то увидит твою работу. Отзывы, комментарии, просто факт того, 
+                                что проект скачали, это топливо для продолжения.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 3 -->
+                    <article class="principle-item">
+                        <div class="principle-number">3</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-bullhorn"></i> Любой пиар полезен, в том числе и нативный
+                            </h3>
+                            <p class="principle-description">
+                                Не стоит брезговать любыми способами рассказать о проекте. Даже если это 
+                                просто упоминание в личной переписке или пост в небольшом сообществе. 
+                                Каждый, кто узнал о проекте, потенциальный игрок.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 4 -->
+                    <article class="principle-item">
+                        <div class="principle-number">4</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-clock"></i> Дедлайн должен иметь запасное время для форс-мажоров
+                            </h3>
+                            <p class="principle-description">
+                                Всегда что-то идёт не по плану: то библиотека сломается, то внезапно 
+                                обнаружится баг, то просто не будет настроения работать. Лучше заложить 
+                                лишнюю неделю или две, чем потом паниковать в последнюю ночь.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 5 -->
+                    <article class="principle-item">
+                        <div class="principle-number">5</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-face-smile"></i> В первую очередь, удовольствие
+                            </h3>
+                            <p class="principle-description">
+                                Если процесс создания не приносит радости, стоит остановиться и спросить себя, 
+                                зачем ты это делаешь. Да, бывают рутинные задачи, но в целом работа над проектом 
+                                должна доставлять удовольствие. Иначе какой смысл?
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 6 -->
+                    <article class="principle-item">
+                        <div class="principle-number">6</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-handshake"></i> Сценарист и режиссёр могут иметь разные виденья, но должны иметь общие
+                            </h3>
+                            <p class="principle-description">
+                                В командной работе важно не полное согласие, а общее понимание цели. 
+                                Можно спорить о деталях, но если все тянут проект в разные стороны, 
+                                ничего хорошего не выйдет. Главное, договориться о базовых вещах.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 7 -->
+                    <article class="principle-item">
+                        <div class="principle-number">7</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-comment-dots"></i> Самоирония важна, но не единственна
+                            </h3>
+                            <p class="principle-description">
+                                Умение посмеяться над собой и своими ошибками спасает от выгорания. 
+                                Но не стоит превращать это в единственный способ взаимодействия с миром. 
+                                Иногда нужно и серьёзно отнестись к своей работе.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Принцип 8 -->
+                    <article class="principle-item">
+                        <div class="principle-number">8</div>
+                        <div class="principle-content">
+                            <h3 class="principle-title">
+                                <i class="fas fa-robot"></i> ИИ это инструмент, который служит затычкой
+                            </h3>
+                            <p class="principle-description">
+                                Искусственный интеллект не заменяет настоящего творца, а лишь заполняет пробелы там, 
+                                где человеческие руки и умы отказываются работать. Это временное решение, пока мы не 
+                                найдём живых людей, готовых делиться своим талантом.
+                            </p>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            
+            <aside class="sidebar" aria-labelledby="sidebar-title">
+                <h2 class="section-title" id="sidebar-title">
+                    <i class="fas fa-link"></i> Навигация
+                </h2>
+                
+                <!-- Ссылка на главную -->
+                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                    <a href="index.html" class="sidebar-link">
+                        <i class="fas fa-home"></i> Вернуться на главную
+                    </a>
+                </div>
+                
+                <!-- Дополнительная информация -->
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(138, 43, 226, 0.2);">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-info-circle"></i> Примечание
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #666; line-height: 1.5;">
+                        Эти принципы не высечены в камне и могут меняться со временем. 
+                        Это просто текущие наблюдения, которые кажутся верными здесь и сейчас. 
+                        Что касается восьмого принципа, художники массово сторонятся нас стороной, 
+                        так что это следствие того, что люди не хотят помогать.
+                    </p>
+                </div>
+            </aside>
+        </main>
+        
+        <footer class="studio-footer" role="contentinfo">
+            <div class="footer-content">
+                <p class="footer-text">
+                    © 2021-2026 Singinx Studio. Все права защищены. 
+                    <span class="footer-highlight">Самые ленивые разработчики™</span>
+                </p>
+                <p class="footer-text">
+                    Мы делаем игры... <span class="footer-highlight">в конце концов</span> • Прокрастинация — это искусство • Сроки гибкие
+                </p>
+                <p class="footer-text" style="font-size: 0.95rem; margin-top: 1rem; opacity: 0.7;">
+                    Основано на дизайне от Deepseek
+                </p>
+            </div>
+        </footer>
+    </article>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Переменные для управления анимацией
+            let titleAnimationTimeout;
+            let titleAnimationIndex = 0;
+            let isAnimating = false;
+            
+            // Переключатель языка с полным переводом
+            const langToggle = document.getElementById('langToggle');
+            let isRussian = false; // Начинаем с английского, так как шапка на английском
+            
+            // Тексты для перевода
+            const translations = {
+                ru: {
+                    // Шапка
+                    headerTitle: "Singinx Studio",
+                    headerSubtitle: "Самая <span class='highlight'>ленивая группа разработчиков</span> – где творчество встречается со стратегической прокрастинацией, а сроки – всего лишь предложения",
+                    
+                    // Основной контент
+                    introTitle: "Что это такое?",
+                    introText: "Это не манифест и не свод законов. Просто наблюдения, которые накопились за время создания игр и общения с коллегами. Никакого пафоса или попыток казаться умнее, чем есть на самом деле. Просто рабочие заметки, которые помогают не наступать на те же грабли.",
+                    principlesTitle: "Список наблюдений",
+                    
+                    // Принципы
+                    principles: [
+                        {
+                            icon: "fa-paint-brush",
+                            title: "Лично моё творчество свободно от коммерции",
+                            description: "Когда делаешь что-то для денег, это работа. Когда делаешь для души, это творчество. Я стараюсь разделять эти два потока. Коммерческие проекты имеют свои правила, а личные живут по своим."
+                        },
+                        {
+                            icon: "fa-users",
+                            title: "Для автора нужен видимый читатель или игрок",
+                            description: "Создавать в вакууме тяжело. Даже если аудитория небольшая, важно знать, что кто-то увидит твою работу. Отзывы, комментарии, просто факт того, что проект скачали, это топливо для продолжения."
+                        },
+                        {
+                            icon: "fa-bullhorn",
+                            title: "Любой пиар полезен, в том числе и нативный",
+                            description: "Не стоит брезговать любыми способами рассказать о проекте. Даже если это просто упоминание в личной переписке или пост в небольшом сообществе. Каждый, кто узнал о проекте, потенциальный игрок."
+                        },
+                        {
+                            icon: "fa-clock",
+                            title: "Дедлайн должен иметь запасное время для форс-мажоров",
+                            description: "Всегда что-то идёт не по плану: то библиотека сломается, то внезапно обнаружится баг, то просто не будет настроения работать. Лучше заложить лишнюю неделю или две, чем потом паниковать в последнюю ночь."
+                        },
+                        {
+                            icon: "fa-face-smile",
+                            title: "В первую очередь, удовольствие",
+                            description: "Если процесс создания не приносит радости, стоит остановиться и спросить себя, зачем ты это делаешь. Да, бывают рутинные задачи, но в целом работа над проектом должна доставлять удовольствие. Иначе какой смысл?"
+                        },
+                        {
+                            icon: "fa-handshake",
+                            title: "Сценарист и режиссёр могут иметь разные виденья, но должны иметь общие",
+                            description: "В командной работе важно не полное согласие, а общее понимание цели. Можно спорить о деталях, но если все тянут проект в разные стороны, ничего хорошего не выйдет. Главное, договориться о базовых вещах."
+                        },
+                        {
+                            icon: "fa-comment-dots",
+                            title: "Самоирония важна, но не единственна",
+                            description: "Умение посмеяться над собой и своими ошибками спасает от выгорания. Но не стоит превращать это в единственный способ взаимодействия с миром. Иногда нужно и серьёзно отнестись к своей работе."
+                        },
+                        {
+                            icon: "fa-robot",
+                            title: "ИИ это инструмент, который служит затычкой",
+                            description: "Искусственный интеллект не заменяет настоящего творца, а лишь заполняет пробелы там, где человеческие руки и умы отказываются работать. Это временное решение, пока мы не найдём живых людей, готовых делиться своим талантом."
+                        }
+                    ],
+                    
+                    // Сайдбар
+                    sidebarTitle: "Навигация",
+                    homeLink: "Вернуться на главную",
+                    noteTitle: "Примечание",
+                    noteText: "Эти принципы не высечены в камне и могут меняться со временем. Это просто текущие наблюдения, которые кажутся верными здесь и сейчас. Что касается восьмого принципа, художники массово сторонятся нас стороной, так что это следствие того, что люди не хотят помогать.",
+                    
+                    // Футер
+                    copyright: "© 2021-2026 Singinx Studio. Все права защищены.",
+                    highlight: "Самые ленивые разработчики™",
+                    footerText1: "Мы делаем игры... <span class='footer-highlight'>в конце концов</span> • Прокрастинация — это искусство • Сроки гибкие",
+                    footerText2: "Основано на дизайне от Deepseek"
+                },
+                en: {
+                    // Шапка
+                    headerTitle: "Singinx Studio",
+                    headerSubtitle: "The <span class='highlight'>laziest developers group</span> – where creativity meets strategic procrastination and deadlines are merely suggestions",
+                    
+                    // Основной контент
+                    introTitle: "What is this?",
+                    introText: "This is not a manifesto or a set of laws. Just observations that have accumulated over time creating games and communicating with colleagues. No pathos or attempts to appear smarter than I actually am. Just working notes that help avoid stepping on the same rake.",
+                    principlesTitle: "List of Observations",
+                    
+                    // Принципы
+                    principles: [
+                        {
+                            icon: "fa-paint-brush",
+                            title: "My personal creativity is free from commerce",
+                            description: "When you do something for money, it's work. When you do it for the soul, it's creativity. I try to separate these two streams. Commercial projects have their own rules, and personal ones live by theirs."
+                        },
+                        {
+                            icon: "fa-users",
+                            title: "An author needs a visible reader or player",
+                            description: "Creating in a vacuum is hard. Even if the audience is small, it's important to know that someone will see your work. Feedback, comments, just the fact that the project was downloaded, this is fuel for continuation."
+                        },
+                        {
+                            icon: "fa-bullhorn",
+                            title: "Any PR is useful, including native",
+                            description: "Don't disdain any ways to tell about the project. Even if it's just a mention in personal correspondence or a post in a small community. Everyone who learned about the project is a potential player."
+                        },
+                        {
+                            icon: "fa-clock",
+                            title: "Deadline should have spare time for force majeure",
+                            description: "Something always goes wrong: a library breaks, a bug is suddenly discovered, or there's just no mood to work. It's better to set aside an extra week or two than to panic at the last night."
+                        },
+                        {
+                            icon: "fa-face-smile",
+                            title: "First and foremost, pleasure",
+                            description: "If the creation process doesn't bring joy, it's worth stopping and asking yourself why you're doing it. Yes, there are routine tasks, but overall working on a project should be enjoyable. Otherwise, what's the point?"
+                        },
+                        {
+                            icon: "fa-handshake",
+                            title: "Screenwriter and director can have different visions, but must have common ones",
+                            description: "In teamwork, what's important is not complete agreement, but a common understanding of the goal. You can argue about details, but if everyone pulls the project in different directions, nothing good will come out. The main thing is to agree on basic things."
+                        },
+                        {
+                            icon: "fa-comment-dots",
+                            title: "Self-irony is important, but not the only thing",
+                            description: "The ability to laugh at yourself and your mistakes saves from burnout. But you shouldn't turn this into the only way to interact with the world. Sometimes you need to take your work seriously."
+                        },
+                        {
+                            icon: "fa-robot",
+                            title: "AI is a tool that serves as a plug",
+                            description: "Artificial intelligence doesn't replace a true creator, but only fills gaps where human hands and minds refuse to work. This is a temporary solution until we find living people willing to share their talent."
+                        }
+                    ],
+                    
+                    // Сайдбар
+                    sidebarTitle: "Navigation",
+                    homeLink: "Return to homepage",
+                    noteTitle: "Note",
+                    noteText: "These principles are not set in stone and may change over time. They are just current observations that seem true here and now. Regarding the eighth principle, artists largely avoid us, so this is a consequence of people not wanting to help.",
+                    
+                    // Футер
+                    copyright: "© 2021-2026 Singinx Studio. All rights reserved.",
+                    highlight: "The laziest developers group™",
+                    footerText1: "We make games... <span class='footer-highlight'>eventually</span> • Procrastination is an art form • Deadlines are flexible",
+                    footerText2: "Based on design by Deepseek"
+                }
+            };
+            
+            // Функция для запуска анимации печати
+            function startTitleAnimation(text) {
+                if (isAnimating) {
+                    clearTimeout(titleAnimationTimeout);
+                    isAnimating = false;
+                }
+                
+                const studioTitle = document.querySelector('.studio-title');
+                studioTitle.textContent = '';
+                titleAnimationIndex = 0;
+                isAnimating = true;
+                
+                function typeWriter() {
+                    if (titleAnimationIndex < text.length) {
+                        studioTitle.textContent += text.charAt(titleAnimationIndex);
+                        titleAnimationIndex++;
+                        titleAnimationTimeout = setTimeout(typeWriter, 50);
+                    } else {
+                        isAnimating = false;
+                    }
+                }
+                
+                typeWriter();
+            }
+            
+            // Функция переключения языка
+            function switchLanguage(lang) {
+                const translation = translations[lang];
+                
+                // Обновляем шапку
+                document.querySelector('.studio-title').textContent = translation.headerTitle;
+                document.querySelector('.studio-subtitle').innerHTML = translation.headerSubtitle;
+                
+                // Обновляем основной контент
+                document.querySelector('.intro-title').innerHTML = `<i class="fas fa-lightbulb"></i> ${translation.introTitle}`;
+                document.querySelector('.intro-text').textContent = translation.introText;
+                document.querySelector('#principles-title').innerHTML = `<i class="fas fa-list-check"></i> ${translation.principlesTitle}`;
+                
+                // Обновляем принципы
+                const principleItems = document.querySelectorAll('.principle-item');
+                principleItems.forEach((item, index) => {
+                    if (index < translation.principles.length) {
+                        const principle = translation.principles[index];
+                        const titleElement = item.querySelector('.principle-title');
+                        const descriptionElement = item.querySelector('.principle-description');
+                        
+                        titleElement.innerHTML = `<i class="fas ${principle.icon}"></i> ${principle.title}`;
+                        descriptionElement.textContent = principle.description;
+                    }
+                });
+                
+                // Обновляем сайдбар
+                document.querySelector('#sidebar-title').innerHTML = `<i class="fas fa-link"></i> ${translation.sidebarTitle}`;
+                
+                const sidebarLinks = document.querySelectorAll('.sidebar-link');
+                if (sidebarLinks[0]) sidebarLinks[0].innerHTML = `<i class="fas fa-home"></i> ${translation.homeLink}`;
+                
+                const noteTitle = document.querySelector('.sidebar h3');
+                const noteText = document.querySelector('.sidebar p:last-child');
+                if (noteTitle) noteTitle.innerHTML = `<i class="fas fa-info-circle"></i> ${translation.noteTitle}`;
+                if (noteText) noteText.textContent = translation.noteText;
+                
+                // Обновляем футер
+                const footerTexts = document.querySelectorAll('.footer-text');
+                if (footerTexts[0]) footerTexts[0].innerHTML = `${translation.copyright} <span class="footer-highlight">${translation.highlight}</span>`;
+                if (footerTexts[1]) footerTexts[1].innerHTML = translation.footerText1;
+                if (footerTexts[2]) footerTexts[2].textContent = translation.footerText2;
+                
+                // Обновляем кнопку переключателя
+                langToggle.innerHTML = `<i class="fas fa-language"></i> ${lang === 'ru' ? 'EN' : 'RU'}`;
+                
+                // Запускаем анимацию для нового заголовка
+                startTitleAnimation(translation.headerTitle);
+            }
+            
+            // Инициализация: начинаем с английской версии
+            switchLanguage('en');
+            
+            // Обработчик переключения языка
+            if (langToggle) {
+                langToggle.addEventListener('click', function() {
+                    isRussian = !isRussian;
+                    const lang = isRussian ? 'ru' : 'en';
+                    switchLanguage(lang);
+                });
+            }
+            
+            // Добавляем CSS для анимаций
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-8px); }
+                }
+                
+                .studio-title {
+                    animation: float 6s ease-in-out infinite;
+                }
+                
+                .principle-item:hover .principle-number {
+                    transform: scale(1.1) rotate(5deg);
+                    transition: transform 0.3s ease;
+                }
+                
+                .principle-number {
+                    transition: transform 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Добавляем эффект при наведении на карточки принципов
+            const principleItems = document.querySelectorAll('.principle-item');
+            principleItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const number = this.querySelector('.principle-number');
+                    if (number) {
+                        number.style.transform = 'scale(1.1) rotate(5deg)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    const number = this.querySelector('.principle-number');
+                    if (number) {
+                        number.style.transform = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
