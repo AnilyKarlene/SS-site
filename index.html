@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singinx Studio - The Laziest Developers Group</title>
+    <meta name="description" content="Singinx Studio - The Laziest Developers Group. We make games with creativity and strategic procrastination.">
+    <meta name="keywords" content="game development, indie games, lazy developers, Singinx Studio, visual novels">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -34,6 +36,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         .studio-card {
@@ -119,7 +129,7 @@
             z-index: 1;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             padding: 0 10px;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .studio-subtitle {
@@ -137,6 +147,7 @@
         .highlight {
             background: linear-gradient(120deg, var(--accent-color) 0%, #ff7b00 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 600;
         }
@@ -187,6 +198,7 @@
             font-size: 1.3rem;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -294,6 +306,7 @@
             position: relative;
             overflow: visible;
             min-height: auto;
+            will-change: transform;
         }
 
         .member-card:hover {
@@ -324,7 +337,7 @@
             font-weight: 800;
             color: var(--dark-color);
             margin-bottom: 0.2rem;
-            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         .member-username {
@@ -390,7 +403,7 @@
             color: #555;
             line-height: 1.5;
             margin-top: 0.5rem;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .member-bio i {
@@ -407,7 +420,7 @@
             padding-top: 0.8rem;
             border-top: 1px dashed rgba(138, 43, 226, 0.2);
             line-height: 1.4;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .member-note i {
@@ -453,7 +466,7 @@
             font-size: clamp(0.8rem, 1.1vw, 0.9rem);
             font-weight: 600;
             animation: pulse-nuclear 2s infinite;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
             width: 100%;
         }
 
@@ -506,7 +519,7 @@
             box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
             pointer-events: none;
             max-width: 80%;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         @keyframes bounce {
@@ -562,7 +575,7 @@
             color: var(--primary-color);
             font-weight: 700;
             font-style: italic;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .assistant-name {
@@ -627,7 +640,7 @@
             line-height: 1.6;
             font-size: clamp(1rem, 1.5vw, 1.2rem);
             font-weight: 600;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Увеличенный текст названия игры */
@@ -692,20 +705,18 @@
             font-size: 0.9em;
         }
 
-        /* Кнопка "Каталог проектов" */
-        .catalog-btn {
+        /* Кнопки для каталога, БИО и принципов */
+        .catalog-btn, .principles-btn, .bio-btn {
             display: block;
             width: 100%;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             text-decoration: none;
             border-radius: 30px;
             font-weight: 700;
             font-size: clamp(1rem, 1.3vw, 1.1rem);
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
             border: 2px solid transparent;
             text-align: center;
             position: relative;
@@ -713,35 +724,74 @@
             z-index: 1;
         }
 
-        .catalog-btn:hover {
+        .catalog-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+        }
+
+        .principles-btn {
+            background: linear-gradient(135deg, #ff9a47, #ff6b81);
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+        }
+
+        .bio-btn {
+            background: linear-gradient(135deg, #0f9d58, #34a853);
+            box-shadow: 0 4px 12px rgba(15, 157, 88, 0.3);
+        }
+
+        .catalog-btn:hover, .principles-btn:hover, .bio-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
             border-color: var(--primary-color);
         }
 
-        .catalog-btn:active {
+        .catalog-btn:hover {
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .principles-btn:hover {
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+            border-color: #ff4757;
+        }
+
+        .bio-btn:hover {
+            box-shadow: 0 8px 20px rgba(15, 157, 88, 0.4);
+            border-color: #0f9d58;
+        }
+
+        .catalog-btn:active, .principles-btn:active, .bio-btn:active {
             transform: translateY(-1px);
         }
 
-        .catalog-btn::before {
+        .catalog-btn::before, .principles-btn::before, .bio-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
             z-index: -1;
             opacity: 0;
             transition: opacity 0.3s ease;
             border-radius: 30px;
         }
 
-        .catalog-btn:hover::before {
+        .catalog-btn::before {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+
+        .principles-btn::before {
+            background: linear-gradient(135deg, #ff2e43, #ff4757);
+        }
+
+        .bio-btn::before {
+            background: linear-gradient(135deg, #0c7c42, #2e8b57);
+        }
+
+        .catalog-btn:hover::before, .principles-btn:hover::before, .bio-btn:hover::before {
             opacity: 1;
         }
 
-        .catalog-btn i {
+        .catalog-btn i, .principles-btn i, .bio-btn i {
             margin-right: 8px;
             font-size: 0.9em;
         }
@@ -786,7 +836,7 @@
             color: #555;
             line-height: 1.6;
             font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .collaboration-highlight {
@@ -845,7 +895,7 @@
             color: #555;
             line-height: 1.6;
             font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .artist-highlight {
@@ -880,7 +930,7 @@
             transition: var(--transition);
             border: 2px solid transparent;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .email-link-item {
@@ -923,13 +973,13 @@
             color: var(--dark-color);
             margin-bottom: 0.2rem;
             font-size: clamp(0.95rem, 1.3vw, 1.1rem);
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .link-description, .email-description {
             font-size: clamp(0.85rem, 1.1vw, 1rem);
             color: #666;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .email-note {
@@ -973,7 +1023,7 @@
             position: relative;
             z-index: 1;
             font-style: italic;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .quote-meta {
@@ -1033,7 +1083,7 @@
             font-size: clamp(0.9rem, 1.2vw, 1.1rem);
             opacity: 0.9;
             margin-bottom: 0.5rem;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .footer-highlight {
@@ -1067,7 +1117,7 @@
             font-weight: normal;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             line-height: 1.5;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .tooltip .tooltip-text::after {
@@ -1111,7 +1161,7 @@
             color: #555;
             line-height: 1.6;
             font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .ideas-highlight {
@@ -1131,7 +1181,7 @@
             color: #666;
             font-size: clamp(0.85rem, 1.1vw, 1rem);
             opacity: 0.7;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Улучшенные медиа-запросы */
@@ -1171,7 +1221,7 @@
                 font-size: clamp(1.2rem, 1.8vw, 1.5rem);
             }
             
-            .game-link-btn, .catalog-btn {
+            .game-link-btn, .catalog-btn, .principles-btn, .bio-btn {
                 padding: 0.7rem 1.3rem;
                 font-size: 0.9rem;
             }
@@ -1227,7 +1277,7 @@
                 font-size: 1.2rem;
             }
             
-            .game-link-btn, .catalog-btn {
+            .game-link-btn, .catalog-btn, .principles-btn, .bio-btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.85rem;
                 width: 100%;
@@ -1267,8 +1317,8 @@
     <article class="studio-card">
         <header class="studio-header" role="banner">
             <div class="language-switcher">
-                <button class="lang-btn" id="langToggle">
-                    <i class="fas fa-language"></i> EN
+                <button class="lang-btn" id="langToggle" aria-label="Switch language">
+                    <i class="fas fa-language" aria-hidden="true"></i> EN
                 </button>
             </div>
             
@@ -1278,9 +1328,9 @@
         
         <main class="studio-content" role="main">
             <div class="main-content">
-                <div class="about-team">
-                    <h3>
-                        <i class="fas fa-info-circle"></i> About Our Team
+                <section class="about-team" aria-labelledby="about-team-title">
+                    <h3 id="about-team-title">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i> About Our Team
                     </h3>
                     <p class="about-text">
                         We're a group of passionate developers who believe that creativity shouldn't be rushed. 
@@ -1300,206 +1350,206 @@
                             The entire team works on pure enthusiasm for fun, which is important.
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <section class="studio-section" aria-labelledby="members-title">
                     <h2 class="section-title" id="members-title">
-                        <i class="fas fa-users-crown"></i> Members
+                        <i class="fas fa-users-crown" aria-hidden="true"></i> Members
                     </h2>
                     <div class="members-grid">
                         <!-- Miranda "Mira" Karlene -->
-                        <div class="member-card" id="mira-card">
-                            <div class="mira-message" id="mira-message">УРААА ПИПИСЬКИ</div>
-                            <div class="member-hidden-note">У неё внутри головы член пророс</div>
+                        <div class="member-card" id="mira-card" role="article" aria-labelledby="mira-name">
+                            <div class="mira-message" id="mira-message" aria-hidden="true">УРААА ПИПИСЬКИ</div>
+                            <div class="member-hidden-note" aria-hidden="true">У неё внутри головы член пророс</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Miranda "Mira" Karlene</h3>
+                                    <h3 class="member-name" id="mira-name">Miranda "Mira" Karlene</h3>
                                     <div class="member-username">@Mirconeta</div>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag highlighted">Account Owner</span>
-                                <span class="role-tag">Lead Scriptwriter</span>
-                                <span class="role-tag">Director</span>
-                                <span class="role-tag">Community Manager</span>
+                                <span class="role-tag highlighted" aria-label="Account Owner">Account Owner</span>
+                                <span class="role-tag" aria-label="Lead Scriptwriter">Lead Scriptwriter</span>
+                                <span class="role-tag" aria-label="Director">Director</span>
+                                <span class="role-tag" aria-label="Community Manager">Community Manager</span>
                                 <span class="special-tag ai-tag" id="ai-tag">AI Brainrot victim</span>
                                 <span class="special-tag lore-tag" id="lore-tag">Хранитель лора</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-feather-alt"></i> The visionary behind our narratives and the voice of our community. Ensures every story hits right in the feels.
+                                <i class="fas fa-feather-alt" aria-hidden="true"></i> The visionary behind our narratives and the voice of our community. Ensures every story hits right in the feels.
                             </p>
                             <div class="project-lead-info">
                                 <div class="project-lead-title">
-                                    <i class="fas fa-crown"></i> Project Lead:
+                                    <i class="fas fa-crown" aria-hidden="true"></i> Project Lead:
                                 </div>
                                 <div class="project-lead-name">"No Invitations (jam version)"</div>
                             </div>
                             <div class="assistant-leader-info">
                                 <div class="assistant-title">
-                                    <i class="fas fa-hands-helping"></i> Assistant Leader:
+                                    <i class="fas fa-hands-helping" aria-hidden="true"></i> Assistant Leader:
                                 </div>
                                 <div class="assistant-name">"DED vs %0"</div>
                             </div>
                         </div>
 
                         <!-- Venom Shadow -->
-                        <div class="member-card">
-                            <div class="member-hidden-note">Fear of visual novels</div>
+                        <div class="member-card" role="article" aria-labelledby="venom-name">
+                            <div class="member-hidden-note" aria-hidden="true">Fear of visual novels</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Venom Shadow</h3>
+                                    <h3 class="member-name" id="venom-name">Venom Shadow</h3>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag">Technical Director</span>
+                                <span class="role-tag" aria-label="Technical Director">Technical Director</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-code"></i> Specializes in everything that is NOT a visual novel. Has an irrational fear of dating sims and fanfiction.
+                                <i class="fas fa-code" aria-hidden="true"></i> Specializes in everything that is NOT a visual novel. Has an irrational fear of dating sims and fanfiction.
                             </p>
                             <div class="member-note">
-                                <i class="fas fa-exclamation-triangle"></i> Will run away screaming if you mention "dating sim" or "otome". Stick to action games!
+                                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Will run away screaming if you mention "dating sim" or "otome". Stick to action games!
                             </div>
                             <div class="project-lead-info">
                                 <div class="project-lead-title">
-                                    <i class="fas fa-crown"></i> Project Lead:
+                                    <i class="fas fa-crown" aria-hidden="true"></i> Project Lead:
                                 </div>
                                 <div class="project-lead-name">"Project Echo"</div>
                             </div>
                         </div>
 
                         <!-- Anily Karlene -->
-                        <div class="member-card">
-                            <div class="member-hidden-note">Эстонская шлюха</div>
+                        <div class="member-card" role="article" aria-labelledby="anily-name">
+                            <div class="member-hidden-note" aria-hidden="true">Эстонская шлюха</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Anily Karlene</h3>
+                                    <h3 class="member-name" id="anily-name">Anily Karlene</h3>
                                     <div class="member-username">@Anily_Karlene</div>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag highlighted">Team Owner</span>
-                                <span class="role-tag">Creative Director</span>
-                                <span class="role-tag">Secondary Director</span>
+                                <span class="role-tag highlighted" aria-label="Team Owner">Team Owner</span>
+                                <span class="role-tag" aria-label="Creative Director">Creative Director</span>
+                                <span class="role-tag" aria-label="Secondary Director">Secondary Director</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-palette"></i> Keeps the creative vision intact while occasionally stepping into the director's chair. The glue that holds our chaos together.
+                                <i class="fas fa-palette" aria-hidden="true"></i> Keeps the creative vision intact while occasionally stepping into the director's chair. The glue that holds our chaos together.
                             </p>
                             <div class="project-lead-info">
                                 <div class="project-lead-title">
-                                    <i class="fas fa-crown"></i> Project Lead:
+                                    <i class="fas fa-crown" aria-hidden="true"></i> Project Lead:
                                 </div>
                                 <div class="project-lead-name">"DED vs %0"</div>
                             </div>
                             <div class="assistant-leader-info">
                                 <div class="assistant-title">
-                                    <i class="fas fa-hands-helping"></i> Assistant Leader:
+                                    <i class="fas fa-hands-helping" aria-hidden="true"></i> Assistant Leader:
                                 </div>
                                 <div class="assistant-name">"ПвК"</div>
                             </div>
                         </div>
 
                         <!-- Ivy Flyeryn -->
-                        <div class="member-card">
-                            <div class="member-hidden-note">Can't draw sprites</div>
+                        <div class="member-card" role="article" aria-labelledby="ivy-name">
+                            <div class="member-hidden-note" aria-hidden="true">Can't draw sprites</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Ivy Flyeryn</h3>
+                                    <h3 class="member-name" id="ivy-name">Ivy Flyeryn</h3>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag">UI/UX Designer</span>
-                                <span class="role-tag">Prompt Engineer</span>
+                                <span class="role-tag" aria-label="UI/UX Designer">UI/UX Designer</span>
+                                <span class="role-tag" aria-label="Prompt Engineer">Prompt Engineer</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-paint-brush"></i> Can't draw character sprites to save her life. Specializes in interfaces and becomes a "prompt engineer" when needed.
+                                <i class="fas fa-paint-brush" aria-hidden="true"></i> Can't draw character sprites to save her life. Specializes in interfaces and becomes a "prompt engineer" when needed.
                             </p>
                             <div class="member-note">
-                                <i class="fas fa-info-circle"></i> Seriously, don't ask her to draw character sprites. She'll either make a UI or generate something with AI.
+                                <i class="fas fa-info-circle" aria-hidden="true"></i> Seriously, don't ask her to draw character sprites. She'll either make a UI or generate something with AI.
                             </div>
                         </div>
 
                         <!-- KardyHeart -->
-                        <div class="member-card" style="position: relative;">
-                            <div class="kardy-error">Kardy.exe stopped responding</div>
+                        <div class="member-card" role="article" aria-labelledby="kardy-name" style="position: relative;">
+                            <div class="kardy-error" aria-hidden="true">Kardy.exe stopped responding</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">KardyHeart</h3>
+                                    <h3 class="member-name" id="kardy-name">KardyHeart</h3>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag">Lead Programmer</span>
-                                <span class="role-tag">Systems Architect</span>
+                                <span class="role-tag" aria-label="Lead Programmer">Lead Programmer</span>
+                                <span class="role-tag" aria-label="Systems Architect">Systems Architect</span>
                                 <span class="special-tag weakness-tag">Weakness: Alzheimer's</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-cogs"></i> The wizard who turns coffee into functional code. Builds the systems that make our games actually work.
+                                <i class="fas fa-cogs" aria-hidden="true"></i> The wizard who turns coffee into functional code. Builds the systems that make our games actually work.
                             </p>
                             <div class="member-note">
-                                <i class="fas fa-table-tennis"></i> Loves ping-pong. The most frequent minigame under her authorship is, unsurprisingly, ping-pong.
+                                <i class="fas fa-table-tennis" aria-hidden="true"></i> Loves ping-pong. The most frequent minigame under her authorship is, unsurprisingly, ping-pong.
                             </div>
                         </div>
 
                         <!-- Likeria -->
-                        <div class="member-card">
-                            <div class="member-hidden-note">Inexperienced voice actor</div>
+                        <div class="member-card" role="article" aria-labelledby="likeria-name">
+                            <div class="member-hidden-note" aria-hidden="true">Inexperienced voice actor</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Likeria</h3>
+                                    <h3 class="member-name" id="likeria-name">Likeria</h3>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag">Game Designer</span>
-                                <span class="role-tag">Voice Actor</span>
-                                <span class="role-tag">Translator</span>
+                                <span class="role-tag" aria-label="Game Designer">Game Designer</span>
+                                <span class="role-tag" aria-label="Voice Actor">Voice Actor</span>
+                                <span class="role-tag" aria-label="Translator">Translator</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-gamepad"></i> Designs the gameplay that keeps players engaged. Also lends their voice to characters and helps with translations.
+                                <i class="fas fa-gamepad" aria-hidden="true"></i> Designs the gameplay that keeps players engaged. Also lends their voice to characters and helps with translations.
                             </p>
                             <div class="member-note">
-                                <i class="fas fa-info-circle"></i> Inexperienced but enthusiastic voice actor. Brings raw talent and passion to every role!
+                                <i class="fas fa-info-circle" aria-hidden="true"></i> Inexperienced but enthusiastic voice actor. Brings raw talent and passion to every role!
                             </div>
                         </div>
 
                         <!-- Lantalla La -->
-                        <div class="member-card">
-                            <div class="member-hidden-note">Cable chewer</div>
+                        <div class="member-card" role="article" aria-labelledby="lantalla-name">
+                            <div class="member-hidden-note" aria-hidden="true">Cable chewer</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Lantalla La</h3>
+                                    <h3 class="member-name" id="lantalla-name">Lantalla La</h3>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag">Sound Designer</span>
-                                <span class="role-tag">Composer</span>
+                                <span class="role-tag" aria-label="Sound Designer">Sound Designer</span>
+                                <span class="role-tag" aria-label="Composer">Composer</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-music"></i> Creates the auditory soul of our games. From epic soundtracks to subtle ambient sounds, they've got it covered.
+                                <i class="fas fa-music" aria-hidden="true"></i> Creates the auditory soul of our games. From epic soundtracks to subtle ambient sounds, they've got it covered.
                             </p>
                             <div class="member-note">
-                                <i class="fas fa-ethernet"></i> Loves chewing internet cables, which is why reports take years to arrive.
+                                <i class="fas fa-ethernet" aria-hidden="true"></i> Loves chewing internet cables, which is why reports take years to arrive.
                             </div>
                         </div>
 
                         <!-- Nikolai Chayasnev -->
-                        <div class="member-card">
-                            <div class="member-hidden-note">Trust with nuclear weapons</div>
+                        <div class="member-card" role="article" aria-labelledby="nikolai-name">
+                            <div class="member-hidden-note" aria-hidden="true">Trust with nuclear weapons</div>
                             <div class="member-header">
                                 <div>
-                                    <h3 class="member-name">Nikolai Chayasnev</h3>
+                                    <h3 class="member-name" id="nikolai-name">Nikolai Chayasnev</h3>
                                 </div>
                             </div>
                             <div class="member-roles">
-                                <span class="role-tag">QA Tester</span>
+                                <span class="role-tag" aria-label="QA Tester">QA Tester</span>
                             </div>
                             <p class="member-bio">
-                                <i class="fas fa-bug"></i> The brave soul who finds every bug, glitch, and edge case. Our first line of defense against game-breaking issues.
+                                <i class="fas fa-bug" aria-hidden="true"></i> The brave soul who finds every bug, glitch, and edge case. Our first line of defense against game-breaking issues.
                             </p>
-                            <div class="special-note">
-                                <i class="fas fa-radiation"></i> Можно доверить ему пульт от ядерного оружия
+                            <div class="special-note" role="note">
+                                <i class="fas fa-radiation" aria-hidden="true"></i> Можно доверить ему пульт от ядерного оружия
                             </div>
                             <div class="project-lead-info">
                                 <div class="project-lead-title">
-                                    <i class="fas fa-crown"></i> Project Lead:
+                                    <i class="fas fa-crown" aria-hidden="true"></i> Project Lead:
                                 </div>
                                 <div class="project-lead-name">"Неправильные"</div>
                             </div>
@@ -1520,9 +1570,9 @@
                 </section>
 
                 <!-- Обновлённый блок выбора игры с кнопкой -->
-                <div class="game-choice-section">
-                    <h3 class="game-choice-title">
-                        <i class="fas fa-question-circle"></i> <span id="game-choice-title">Сейчас основной игрой выбрана:</span>
+                <section class="game-choice-section" aria-labelledby="game-choice-title">
+                    <h3 class="game-choice-title" id="game-choice-title">
+                        <i class="fas fa-question-circle" aria-hidden="true"></i> <span>Сейчас основной игрой выбрана:</span>
                     </h3>
                     <p class="game-choice-text">
                         <span class="game-choice-highlight" id="game-choice-text">ПвК - Эпизод 3</span>
@@ -1535,34 +1585,34 @@
                     <!-- Кнопка с ссылкой на игру -->
                     <a href="https://vkplay.ru/play/game/parovozik-v-kachalkovo-2-epizod/?mt_link_id=q0amd9" 
                        target="_blank" 
-                       rel="noopener noreferrer" 
+                       rel="noopener noreferrer nofollow" 
                        class="game-link-btn"
                        aria-label="Подробнее о игре ПвК - Эпизод 3">
-                        <i class="fas fa-external-link-alt"></i> Подробнее о игре здесь
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> Подробнее о игре здесь
                     </a>
-                </div>
+                </section>
 
-                <div class="saikono-message">
+                <div class="saikono-message" role="note">
                     Saikono, when will you fix "Tiny Bunny"?
                 </div>
 
-                <section class="ideas-section">
-                    <h3 class="ideas-title">
-                        <i class="fas fa-lightbulb"></i> Player Ideas Welcome!
+                <section class="ideas-section" aria-labelledby="ideas-title">
+                    <h3 class="ideas-title" id="ideas-title">
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i> Player Ideas Welcome!
                     </h3>
                     <div class="ideas-content">
                         <p>We're always interested in hearing ideas from our players! If you have a cool concept, mechanic, or story idea, 
                         feel free to share it with us. While we can't promise anything, <span class="ideas-highlight">with a certain chance</span> 
                         your idea might appear in our future games or updates.</p>
                         <p style="margin-top: 1rem; font-size: 0.95rem; opacity: 0.8;">
-                            <i class="fas fa-info-circle"></i> Just don't ask us to make a visual novel - Venom Shadow might have a panic attack.
+                            <i class="fas fa-info-circle" aria-hidden="true"></i> Just don't ask us to make a visual novel - Venom Shadow might have a panic attack.
                         </p>
                     </div>
                 </section>
 
-                <div class="collaboration-offer">
-                    <h3 class="collaboration-title">
-                        <i class="fas fa-handshake"></i> Want to publish your game with us?
+                <section class="collaboration-offer" aria-labelledby="collaboration-title">
+                    <h3 class="collaboration-title" id="collaboration-title">
+                        <i class="fas fa-handshake" aria-hidden="true"></i> Want to publish your game with us?
                     </h3>
                     <div class="collaboration-content">
                         <p>Interested individuals have access to an agreement whereby the author of their game can request help 
@@ -1570,35 +1620,35 @@
                         and publish the game under our name.</p>
                         
                         <div class="collaboration-note">
-                            <i class="fas fa-info-circle"></i> We provide programming, sound design, testing, and community management support. 
+                            <i class="fas fa-info-circle" aria-hidden="true"></i> We provide programming, sound design, testing, and community management support. 
                             You bring the idea and vision!
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="looking-for-artist">
-                    <h3 class="artist-title">
-                        <i class="fas fa-paint-brush"></i> We're looking for an artist!
+                <section class="looking-for-artist" aria-labelledby="artist-title">
+                    <h3 class="artist-title" id="artist-title">
+                        <i class="fas fa-paint-brush" aria-hidden="true"></i> We're looking for an artist!
                     </h3>
                     <div class="artist-content">
                         <p>The group is actively looking for an artist for our projects. If you can draw character sprites, backgrounds, 
                         or UI elements and want to collaborate on game development, we'd love to hear from you!</p>
                     </div>
-                </div>
+                </section>
             </div>
 
             <aside class="links-container" aria-labelledby="links-title">
                 <h2 class="section-title" id="links-title">
-                    <i class="fas fa-external-link-alt"></i> Find Us
+                    <i class="fas fa-external-link-alt" aria-hidden="true"></i> Find Us
                 </h2>
                 <div class="links-list">
                     <a href="https://gamejolt.com/@SinginxStudio" 
                        target="_blank" 
-                       rel="noopener noreferrer" 
+                       rel="noopener noreferrer nofollow" 
                        class="link-item"
                        aria-label="Visit our GameJolt profile">
                         <div class="link-icon">
-                            <i class="fas fa-gamepad"></i>
+                            <i class="fas fa-gamepad" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">GameJolt</div>
@@ -1608,11 +1658,11 @@
                     
                     <a href="https://singinxstudio.itch.io/" 
                        target="_blank"
-                       rel="noopener noreferrer"
+                       rel="noopener noreferrer nofollow"
                        class="link-item"
                        aria-label="Visit our Itch.io page">
                         <div class="link-icon" style="background: linear-gradient(135deg, #fa5b5b, #ff7b00);">
-                            <i class="fas fa-fire"></i>
+                            <i class="fas fa-fire" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">Itch.io</div>
@@ -1622,11 +1672,11 @@
                     
                     <a href="https://t.me/SinginxStudio" 
                        target="_blank"
-                       rel="noopener noreferrer"
+                       rel="noopener noreferrer nofollow"
                        class="link-item"
                        aria-label="Join our Telegram channel">
                         <div class="link-icon" style="background: linear-gradient(135deg, #0088cc, #34b7f1);">
-                            <i class="fab fa-telegram"></i>
+                            <i class="fab fa-telegram" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">Telegram</div>
@@ -1636,11 +1686,11 @@
                     
                     <a href="https://www.youtube.com/@SinginxStudio" 
                        target="_blank"
-                       rel="noopener noreferrer"
+                       rel="noopener noreferrer nofollow"
                        class="link-item"
                        aria-label="Subscribe to our YouTube channel">
                         <div class="link-icon" style="background: linear-gradient(135deg, #ff0000, #cc0000);">
-                            <i class="fab fa-youtube"></i>
+                            <i class="fab fa-youtube" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">YouTube</div>
@@ -1650,11 +1700,11 @@
                     
                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
                        target="_blank"
-                       rel="noopener noreferrer"
+                       rel="noopener noreferrer nofollow"
                        class="link-item"
                        aria-label="Urination Guide (Rickroll)">
                         <div class="link-icon" style="background: linear-gradient(135deg, #8a2be2, #4169e1);">
-                            <i class="fas fa-toilet"></i>
+                            <i class="fas fa-toilet" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">Urination Guide</div>
@@ -1663,9 +1713,9 @@
                     </a>
 
                     <!-- Twitch -->
-                    <div class="link-item" style="opacity: 0.6; cursor: not-allowed;">
+                    <div class="link-item" style="opacity: 0.6; cursor: not-allowed;" aria-disabled="true" tabindex="-1">
                         <div class="link-icon" style="background: linear-gradient(135deg, #9146ff, #772ce8);">
-                            <i class="fab fa-twitch"></i>
+                            <i class="fab fa-twitch" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">Twitch</div>
@@ -1679,34 +1729,50 @@
                     </div>
 
                     <!-- Google Почта -->
-                    <div class="email-link-item" onclick="copyEmail()" style="cursor: pointer;">
+                    <button type="button" class="email-link-item" onclick="copyEmail()" aria-label="Copy email address: singinxstudio@gmail.com">
                         <div class="email-icon">
-                            <i class="fab fa-google"></i>
+                            <i class="fab fa-google" aria-hidden="true"></i>
                         </div>
                         <div class="email-content">
                             <div class="email-title">singinxstudio@gmail.com</div>
                             <div class="email-description" id="email-description">Email address for jokes about Alzheimer's and losers</div>
                             <div class="email-note" id="email-note">Address them primarily to Lantalla</div>
                         </div>
-                    </div>
+                    </button>
 
-                    <a href="#" 
-                       class="link-item"
-                       onclick="return false;"
-                       aria-label="This is our website - you're already here!"
-                       style="cursor: default; opacity: 0.9;">
+                    <div class="link-item" tabindex="0" aria-label="You are currently on our official website">
                         <div class="link-icon" style="background: linear-gradient(135deg, #555, #777);">
-                            <i class="fas fa-home"></i>
+                            <i class="fas fa-home" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">Our Website</div>
                             <div class="link-description">You're already here! This is our official site</div>
                         </div>
+                    </div>
+
+                    <!-- Ficbook -->
+                    <a href="https://ficbook.net/authors/6379391" 
+                       target="_blank"
+                       rel="noopener noreferrer nofollow"
+                       class="link-item"
+                       aria-label="Visit Mira's Ficbook profile">
+                        <div class="link-icon" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                            <i class="fas fa-book-open" aria-hidden="true"></i>
+                        </div>
+                        <div class="link-content">
+                            <div class="link-title">Ficbook</div>
+                            <div class="link-description">
+                                <span class="tooltip">
+                                    Не смейтесь пожалуйста
+                                    <span class="tooltip-text">Профиль Миры для её творческих экспериментов и писательских работ</span>
+                                </span>
+                            </div>
+                        </div>
                     </a>
 
-                    <div class="link-item" style="opacity: 0.6; cursor: not-allowed;">
+                    <div class="link-item" style="opacity: 0.6; cursor: not-allowed;" aria-disabled="true" tabindex="-1">
                         <div class="link-icon" style="background: linear-gradient(135deg, #5865f2, #404eed);">
-                            <i class="fab fa-discord"></i>
+                            <i class="fab fa-discord" aria-hidden="true"></i>
                         </div>
                         <div class="link-content">
                             <div class="link-title">Discord</div>
@@ -1719,9 +1785,19 @@
                         </div>
                     </div>
 
-                    <!-- Кнопка "Каталог проектов" -->
+                    <!-- "Каталог проектов" -->
                     <a href="catalog.html" class="catalog-btn" aria-label="Перейти в каталог проектов">
-                        <i class="fas fa-folder-open"></i> Каталог проектов
+                        <i class="fas fa-folder-open" aria-hidden="true"></i> Каталог проектов
+                    </a>
+
+                    <!-- Каталог БИО -->
+                    <a href="bio.html" class="bio-btn" aria-label="Каталог БИО">
+                        <i class="fas fa-dna" aria-hidden="true"></i> Каталог БИО
+                    </a>
+                    
+                    <!-- Принципы разработки у Миры -->
+                    <a href="principles.html" class="principles-btn" aria-label="Принципы разработки у Миры">
+                        <i class="fas fa-book" aria-hidden="true"></i> Принципы разработки у Миры
                     </a>
                 </div>
             </aside>
@@ -1744,184 +1820,292 @@
     </article>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Анимация печати заголовка
-            const studioTitle = document.querySelector('.studio-title');
-            const originalText = studioTitle.textContent;
-            studioTitle.textContent = '';
+        (function() {
+            'use strict';
             
-            let i = 0;
-            function typeWriter() {
-                if (i < originalText.length) {
-                    studioTitle.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
-            }
-            
-            typeWriter();
-
-            // Эффект ripple для карточек участников
-            const memberCards = document.querySelectorAll('.member-card');
-            memberCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // Проверяем, что клик был именно по карточке, а не по дочерним элементам
-                    if (e.target === card || e.target.closest('.member-card') === card) {
-                        const ripple = document.createElement('span');
-                        const rect = this.getBoundingClientRect();
-                        const size = Math.max(rect.width, rect.height);
-                        const x = e.clientX - rect.left - size / 2;
-                        const y = e.clientY - rect.top - size / 2;
-                        
-                        ripple.style.cssText = `
-                            position: absolute;
-                            border-radius: 50%;
-                            background: rgba(138, 43, 226, 0.2);
-                            transform: scale(0);
-                            animation: ripple-animation 0.6s linear;
-                            width: ${size}px;
-                            height: ${size}px;
-                            top: ${y}px;
-                            left: ${x}px;
-                            pointer-events: none;
-                            z-index: 5;
-                        `;
-                        
-                        this.appendChild(ripple);
-                        
-                        setTimeout(() => {
-                            if (ripple.parentNode) {
-                                ripple.parentNode.removeChild(ripple);
-                            }
-                        }, 600);
+            // Инициализация при загрузке DOM
+            document.addEventListener('DOMContentLoaded', function() {
+                // Загрузка сохранённого языка
+                const savedLang = localStorage.getItem('singinx-lang') || 'en';
+                let isEnglish = savedLang === 'en';
+                applyLanguage(isEnglish ? 'en' : 'ru', false);
+                
+                // Анимация печати заголовка
+                const studioTitle = document.querySelector('.studio-title');
+                const originalText = studioTitle.textContent;
+                studioTitle.textContent = '';
+                
+                let i = 0;
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        studioTitle.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
                     }
-                });
-            });
+                }
+                
+                typeWriter();
 
-            // Обработчик для карточки Миры
-            const miraCard = document.getElementById('mira-card');
-            const miraMessage = document.getElementById('mira-message');
-            let miraClickCount = 0;
-            
-            if (miraCard && miraMessage) {
-                miraCard.addEventListener('click', function(e) {
-                    if (e.target === miraCard || e.target.closest('.member-card') === miraCard) {
-                        miraMessage.style.display = 'block';
-                        
+                // Делегирование событий для ripple эффекта
+                const membersGrid = document.querySelector('.members-grid');
+                if (membersGrid) {
+                    membersGrid.addEventListener('click', function(e) {
+                        const memberCard = e.target.closest('.member-card');
+                        if (memberCard && !e.target.closest('a') && !e.target.closest('button')) {
+                            createRippleEffect(e, memberCard);
+                        }
+                    });
+                }
+
+                // Обработчик для карточки Миры
+                const miraCard = document.getElementById('mira-card');
+                const miraMessage = document.getElementById('mira-message');
+                let miraClickCount = 0;
+                
+                if (miraCard && miraMessage) {
+                    miraCard.addEventListener('click', function(e) {
+                        if (e.target === miraCard || e.target.closest('.member-card') === miraCard) {
+                            showMiraMessage();
+                        }
+                    });
+                }
+
+                // Делегирование событий для ссылок и кнопок
+                document.addEventListener('mouseenter', handleLinkHover);
+                document.addEventListener('mouseleave', handleLinkHoverEnd);
+                
+                // Обработчик для цитаты
+                const quoteText = document.querySelector('.quote-text');
+                if (quoteText) {
+                    quoteText.addEventListener('mouseenter', function() {
+                        this.style.transform = 'scale(1.02)';
+                    });
+                    
+                    quoteText.addEventListener('mouseleave', function() {
+                        this.style.transform = '';
+                    });
+                }
+
+                // Easter egg для ядерной шутки
+                const nuclearJoke = document.querySelector('.special-note');
+                if (nuclearJoke) {
+                    nuclearJoke.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        this.style.animation = 'none';
+                        this.style.transform = 'scale(1.2)';
                         setTimeout(() => {
-                            miraMessage.style.display = 'none';
-                        }, 3000);
-                        
-                        miraClickCount++;
-                        if (miraClickCount === 5) {
-                            console.log("🎉🎉🎉 УРААА ПИПИСЬКИ x5! 🎉🎉🎉");
-                            miraMessage.style.animation = 'bounce 0.3s ease 3';
-                            setTimeout(() => {
-                                miraMessage.style.animation = 'bounce 0.5s ease infinite alternate';
-                            }, 900);
+                            this.style.transform = '';
+                            this.style.animation = 'pulse-nuclear 2s infinite';
+                        }, 300);
+                    });
+                }
+
+                // Easter egg для ошибки KardyHeart
+                const kardyCard = document.querySelector('.member-card:nth-of-type(5)');
+                if (kardyCard) {
+                    kardyCard.addEventListener('mouseenter', function() {
+                        const errorText = this.querySelector('.kardy-error');
+                        if (errorText) {
+                            errorText.style.color = 'rgba(255, 71, 87, 0.15)';
+                        }
+                    });
+                    
+                    kardyCard.addEventListener('mouseleave', function() {
+                        const errorText = this.querySelector('.kardy-error');
+                        if (errorText) {
+                            errorText.style.color = 'rgba(255, 71, 87, 0.08)';
+                        }
+                    });
+                }
+
+                // Переключатель языка
+                const langToggle = document.getElementById('langToggle');
+                if (langToggle) {
+                    langToggle.addEventListener('click', function() {
+                        isEnglish = !isEnglish;
+                        const lang = isEnglish ? 'en' : 'ru';
+                        localStorage.setItem('singinx-lang', lang);
+                        applyLanguage(lang, true);
+                    });
+                }
+
+                // Добавляем CSS для анимаций
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes ripple-animation {
+                        to {
+                            transform: scale(4);
+                            opacity: 0;
                         }
                     }
-                });
+                    
+                    @keyframes float {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-8px); }
+                    }
+                    
+                    .studio-title {
+                        animation: float 6s ease-in-out infinite;
+                    }
+                    
+                    @media (prefers-reduced-motion: reduce) {
+                        .studio-title {
+                            animation: none;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            });
+
+            // Функции
+            function createRippleEffect(event, element) {
+                const rect = element.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+                
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(138, 43, 226, 0.2);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                    z-index: 5;
+                `;
+                
+                element.appendChild(ripple);
+                
+                setTimeout(() => {
+                    if (ripple.parentNode === element) {
+                        element.removeChild(ripple);
+                    }
+                }, 600);
             }
 
-            // Эффект при наведении на ссылки
-            const links = document.querySelectorAll('.link-item, .email-link-item, .game-link-btn, .catalog-btn');
-            links.forEach(link => {
-                link.addEventListener('mouseenter', function() {
-                    const icon = this.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt, .fas.fa-folder-open');
+            function showMiraMessage() {
+                const miraMessage = document.getElementById('mira-message');
+                if (!miraMessage) return;
+                
+                miraMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    miraMessage.style.display = 'none';
+                }, 3000);
+            }
+
+            function handleLinkHover(e) {
+                const link = e.target.closest('.link-item, .email-link-item, .game-link-btn, .catalog-btn, .principles-btn, .bio-btn');
+                if (link) {
+                    const icon = link.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt, .fas.fa-folder-open, .fas.fa-book, .fas.fa-dna');
                     if (icon) {
                         icon.style.transform = 'rotate(10deg) scale(1.2)';
-                        icon.style.transition = 'transform 0.3s ease';
                     }
-                });
-                
-                link.addEventListener('mouseleave', function() {
-                    const icon = this.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt, .fas.fa-folder-open');
+                }
+            }
+
+            function handleLinkHoverEnd(e) {
+                const link = e.target.closest('.link-item, .email-link-item, .game-link-btn, .catalog-btn, .principles-btn, .bio-btn');
+                if (link) {
+                    const icon = link.querySelector('.link-icon i, .email-icon i, .fas.fa-external-link-alt, .fas.fa-folder-open, .fas.fa-book, .fas.fa-dna');
                     if (icon) {
                         icon.style.transform = '';
                     }
-                });
-            });
-
-            // Анимация для цитаты
-            const quoteText = document.querySelector('.quote-text');
-            if (quoteText) {
-                quoteText.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.02)';
-                    this.style.transition = 'transform 0.3s ease';
-                });
-                
-                quoteText.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
-            }
-
-            // Easter egg для ядерной шутки
-            const nuclearJoke = document.querySelector('.special-note');
-            if (nuclearJoke) {
-                nuclearJoke.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    this.style.animation = 'none';
-                    this.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                        this.style.animation = 'pulse-nuclear 2s infinite';
-                    }, 300);
-                    
-                    console.log('🚀💥 Nuclear launch detected! Just kidding... or are we?');
-                });
-            }
-
-            // Easter egg для ошибки KardyHeart
-            const kardyCard = document.querySelector('.member-card:nth-child(5)');
-            if (kardyCard) {
-                kardyCard.addEventListener('mouseenter', function() {
-                    const errorText = this.querySelector('.kardy-error');
-                    if (errorText) {
-                        errorText.style.color = 'rgba(255, 71, 87, 0.15)';
-                        errorText.style.transition = 'color 0.3s';
-                    }
-                });
-                
-                kardyCard.addEventListener('mouseleave', function() {
-                    const errorText = this.querySelector('.kardy-error');
-                    if (errorText) {
-                        errorText.style.color = 'rgba(255, 71, 87, 0.08)';
-                    }
-                });
+                }
             }
 
             // Функция копирования email
-            function copyEmail() {
+            window.copyEmail = function() {
                 const email = 'singinxstudio@gmail.com';
-                navigator.clipboard.writeText(email).then(() => {
-                    const emailItem = document.querySelector('.email-link-item');
-                    const originalHTML = emailItem.innerHTML;
+                
+                // Fallback для старых браузеров
+                const fallbackCopy = function() {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = email;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
                     
-                    emailItem.innerHTML = `
-                        <div class="email-icon" style="background: linear-gradient(135deg, #0f9d58, #4285f4);">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="email-content">
-                            <div class="email-title">Email copied!</div>
-                            <div class="email-description">${email}</div>
-                            <div class="email-note">Paste it anywhere</div>
-                        </div>
-                    `;
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            showEmailCopySuccess(email);
+                        } else {
+                            showEmailCopyFallback(email);
+                        }
+                    } catch (err) {
+                        showEmailCopyFallback(email);
+                    }
                     
-                    setTimeout(() => {
-                        emailItem.innerHTML = originalHTML;
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy email: ', err);
-                    alert('Failed to copy email. Please copy it manually: ' + email);
-                });
+                    document.body.removeChild(textArea);
+                };
+                
+                // Современный Clipboard API
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(email)
+                        .then(() => {
+                            showEmailCopySuccess(email);
+                        })
+                        .catch(() => {
+                            fallbackCopy();
+                        });
+                } else {
+                    fallbackCopy();
+                }
+            };
+
+            function showEmailCopySuccess(email) {
+                const emailItem = document.querySelector('.email-link-item');
+                if (!emailItem) return;
+                
+                const originalHTML = emailItem.innerHTML;
+                
+                emailItem.innerHTML = `
+                    <div class="email-icon" style="background: linear-gradient(135deg, #0f9d58, #4285f4);">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </div>
+                    <div class="email-content">
+                        <div class="email-title">Email copied!</div>
+                        <div class="email-description">${email}</div>
+                        <div class="email-note">Paste it anywhere</div>
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    emailItem.innerHTML = originalHTML;
+                }, 2000);
             }
 
-            // Переключатель языка
-            const langToggle = document.getElementById('langToggle');
-            let isEnglish = true;
-            
+            function showEmailCopyFallback(email) {
+                const emailItem = document.querySelector('.email-link-item');
+                if (!emailItem) return;
+                
+                const originalHTML = emailItem.innerHTML;
+                
+                emailItem.innerHTML = `
+                    <div class="email-icon" style="background: linear-gradient(135deg, #f4b400, #ea4335);">
+                        <i class="fas fa-exclamation" aria-hidden="true"></i>
+                    </div>
+                    <div class="email-content">
+                        <div class="email-title">Select and copy:</div>
+                        <div class="email-description" style="user-select: all;">${email}</div>
+                        <div class="email-note">Press Ctrl+C to copy</div>
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    emailItem.innerHTML = originalHTML;
+                }, 3000);
+            }
+
+            // Перевод
             const translations = {
                 en: {
                     title: "Singinx Studio",
@@ -1948,6 +2132,8 @@
                     gameChoiceNote: "(Anily Karlene - assistant leader)",
                     gameButtonText: "More about the game here",
                     catalogButtonText: "Projects Catalog",
+                    bioButtonText: "BIO Catalog",
+                    principlesButtonText: "Mira's Development Principles",
                     saikono: "Saikono, when will you fix 'Tiny Bunny'?",
                     footer: "This was written by Deepseek, we'll all see Detroit: Become Human in reality someday",
                     langBtn: "RU",
@@ -1980,6 +2166,8 @@
                     gameChoiceNote: "(Anily Karlene - помощник лидера)",
                     gameButtonText: "Подробнее о игре здесь",
                     catalogButtonText: "Каталог проектов",
+                    bioButtonText: "Каталог БИО",
+                    principlesButtonText: "Принципы разработки у Миры",
                     saikono: "Saikono, когда исправишь 'Tiny Bunny'?",
                     footer: "Это, кстати, Deepseek писал, мы все когда-нибудь увидим Detroit: Become Human в реальности",
                     langBtn: "EN",
@@ -1988,102 +2176,106 @@
                     loreTag: "Хранитель лора"
                 }
             };
-            
-            if (langToggle) {
-                langToggle.addEventListener('click', function() {
-                    isEnglish = !isEnglish;
-                    const lang = isEnglish ? 'en' : 'ru';
-                    
-                    const titleElement = document.querySelector('.studio-title');
-                    const subtitleElement = document.querySelector('.studio-subtitle');
-                    const aboutTeamTitle = document.querySelector('.about-team h3');
-                    const aboutTeamTexts = document.querySelectorAll('.about-team .about-text');
-                    const nameExplanation = document.querySelector('.name-explanation');
-                    const membersTitle = document.querySelector('#members-title');
-                    const linksTitle = document.querySelector('#links-title');
-                    const ideasTitleElement = document.querySelector('.ideas-title');
-                    const ideasContentFirst = document.querySelector('.ideas-content p:first-child');
-                    const ideasContentLast = document.querySelector('.ideas-content p:last-child');
-                    const collaborationTitle = document.querySelector('.collaboration-title');
-                    const collaborationText = document.querySelector('.collaboration-content p:first-child');
-                    const collaborationNote = document.querySelector('.collaboration-note');
-                    const artistTitle = document.querySelector('.artist-title');
-                    const artistText = document.querySelector('.artist-content p:first-child');
-                    const emailTitle = document.querySelector('.email-title');
-                    const emailDescription = document.querySelector('.email-description');
-                    const emailNote = document.querySelector('.email-note');
-                    const gameChoiceTitle = document.querySelector('#game-choice-title');
-                    const gameChoiceText = document.querySelector('#game-choice-text');
-                    const gameChoiceNote = document.querySelector('.game-choice-section small');
-                    const gameButton = document.querySelector('.game-link-btn');
-                    const catalogButton = document.querySelector('.catalog-btn');
-                    const saikonoElement = document.querySelector('.saikono-message');
-                    const footerElement = document.querySelector('.footer-text:last-child');
-                    const copyrightElement = document.querySelector('.footer-text:first-child');
-                    
-                    const aiTag = document.getElementById('ai-tag');
-                    const loreTag = document.getElementById('lore-tag');
-                    
-                    if (titleElement) titleElement.textContent = translations[lang].title;
-                    if (subtitleElement) subtitleElement.innerHTML = translations[lang].subtitle;
-                    if (aboutTeamTitle) aboutTeamTitle.innerHTML = `<i class="fas fa-info-circle"></i> ${translations[lang].aboutTeam}`;
-                    if (aboutTeamTexts[0]) aboutTeamTexts[0].textContent = translations[lang].aboutText1;
-                    if (aboutTeamTexts[1]) aboutTeamTexts[1].textContent = translations[lang].aboutText2;
-                    if (nameExplanation) nameExplanation.innerHTML = translations[lang].nameExplanation;
-                    if (membersTitle) membersTitle.innerHTML = `<i class="fas fa-users-crown"></i> ${translations[lang].members}`;
-                    if (linksTitle) linksTitle.innerHTML = `<i class="fas fa-external-link-alt"></i> ${translations[lang].findUs}`;
-                    if (ideasTitleElement) ideasTitleElement.innerHTML = `<i class="fas fa-lightbulb"></i> ${translations[lang].ideasTitle}`;
-                    if (ideasContentFirst) ideasContentFirst.innerHTML = translations[lang].ideasText;
-                    if (ideasContentLast) ideasContentLast.innerHTML = `<i class="fas fa-info-circle"></i> ${translations[lang].ideasNote}`;
-                    if (collaborationTitle) collaborationTitle.innerHTML = `<i class="fas fa-handshake"></i> ${translations[lang].collaborationTitle}`;
-                    if (collaborationText) collaborationText.innerHTML = translations[lang].collaborationText;
-                    if (collaborationNote) collaborationNote.innerHTML = `<i class="fas fa-info-circle"></i> ${translations[lang].collaborationNote}`;
-                    if (artistTitle) artistTitle.innerHTML = `<i class="fas fa-paint-brush"></i> ${translations[lang].artistTitle}`;
-                    if (artistText) artistText.textContent = translations[lang].artistText;
-                    if (emailTitle) emailTitle.textContent = translations[lang].emailTitle;
-                    if (emailDescription) emailDescription.textContent = translations[lang].emailDescription;
-                    if (emailNote) emailNote.textContent = translations[lang].emailNote;
-                    if (gameChoiceTitle) gameChoiceTitle.textContent = translations[lang].gameChoiceTitle;
-                    if (gameChoiceText) gameChoiceText.textContent = translations[lang].gameChoiceText;
-                    if (gameChoiceNote) gameChoiceNote.textContent = translations[lang].gameChoiceNote;
-                    if (gameButton) gameButton.innerHTML = `<i class="fas fa-external-link-alt"></i> ${translations[lang].gameButtonText}`;
-                    if (catalogButton) catalogButton.innerHTML = `<i class="fas fa-folder-open"></i> ${translations[lang].catalogButtonText}`;
-                    if (saikonoElement) saikonoElement.textContent = translations[lang].saikono;
-                    if (footerElement) footerElement.textContent = translations[lang].footer;
-                    if (copyrightElement) {
-                        const yearText = lang === 'en' ? "© 2021-2026 Singinx Studio. All rights reserved." : "© 2021-2026 Singinx Studio. Все права защищены.";
-                        const highlightText = lang === 'en' ? "The laziest developers group™" : "Самые ленивые разработчики™";
-                        copyrightElement.innerHTML = `${yearText} <span class="footer-highlight">${highlightText}</span>`;
-                    }
-                    
-                    if (aiTag) aiTag.textContent = translations[lang].aiTag;
-                    if (loreTag) loreTag.textContent = translations[lang].loreTag;
-                    
-                    langToggle.innerHTML = `<i class="fas fa-language"></i> ${translations[lang].langBtn}`;
-                });
-            }
 
-            // Добавляем CSS для анимаций
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple-animation {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
+            function applyLanguage(lang, animateTitle) {
+                const isEnglish = lang === 'en';
+                const t = translations[lang];
+                
+                // Обновляем атрибут lang у html
+                document.documentElement.lang = lang;
+                
+                const titleElement = document.querySelector('.studio-title');
+                const subtitleElement = document.querySelector('.studio-subtitle');
+                const aboutTeamTitle = document.querySelector('.about-team h3');
+                const aboutTeamTexts = document.querySelectorAll('.about-team .about-text');
+                const nameExplanation = document.querySelector('.name-explanation');
+                const membersTitle = document.querySelector('#members-title');
+                const linksTitle = document.querySelector('#links-title');
+                const ideasTitleElement = document.querySelector('.ideas-title');
+                const ideasContentFirst = document.querySelector('.ideas-content p:first-child');
+                const ideasContentLast = document.querySelector('.ideas-content p:last-child');
+                const collaborationTitle = document.querySelector('.collaboration-title');
+                const collaborationText = document.querySelector('.collaboration-content p:first-child');
+                const collaborationNote = document.querySelector('.collaboration-note');
+                const artistTitle = document.querySelector('.artist-title');
+                const artistText = document.querySelector('.artist-content p:first-child');
+                const emailTitle = document.querySelector('.email-title');
+                const emailDescription = document.querySelector('.email-description');
+                const emailNote = document.querySelector('.email-note');
+                const gameChoiceTitle = document.querySelector('#game-choice-title span');
+                const gameChoiceText = document.querySelector('#game-choice-text');
+                const gameChoiceNote = document.querySelector('.game-choice-section small');
+                const gameButton = document.querySelector('.game-link-btn');
+                const catalogButton = document.querySelector('.catalog-btn');
+                const bioButton = document.querySelector('.bio-btn');
+                const principlesButton = document.querySelector('.principles-btn');
+                const saikonoElement = document.querySelector('.saikono-message');
+                const footerElement = document.querySelector('.footer-text:last-child');
+                const copyrightElement = document.querySelector('.footer-text:first-child');
+                
+                const aiTag = document.getElementById('ai-tag');
+                const loreTag = document.getElementById('lore-tag');
+                
+                if (titleElement) {
+                    if (animateTitle) {
+                        const originalText = titleElement.textContent;
+                        titleElement.textContent = '';
+                        let i = 0;
+                        function typeWriter() {
+                            if (i < t.title.length) {
+                                titleElement.textContent += t.title.charAt(i);
+                                i++;
+                                setTimeout(typeWriter, 50);
+                            }
+                        }
+                        typeWriter();
+                    } else {
+                        titleElement.textContent = t.title;
                     }
                 }
-                
-                @keyframes float {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-8px); }
+                if (subtitleElement) subtitleElement.innerHTML = t.subtitle;
+                if (aboutTeamTitle) aboutTeamTitle.innerHTML = `<i class="fas fa-info-circle"></i> ${t.aboutTeam}`;
+                if (aboutTeamTexts[0]) aboutTeamTexts[0].textContent = t.aboutText1;
+                if (aboutTeamTexts[1]) aboutTeamTexts[1].textContent = t.aboutText2;
+                if (nameExplanation) nameExplanation.innerHTML = t.nameExplanation;
+                if (membersTitle) membersTitle.innerHTML = `<i class="fas fa-users-crown"></i> ${t.members}`;
+                if (linksTitle) linksTitle.innerHTML = `<i class="fas fa-external-link-alt"></i> ${t.findUs}`;
+                if (ideasTitleElement) ideasTitleElement.innerHTML = `<i class="fas fa-lightbulb"></i> ${t.ideasTitle}`;
+                if (ideasContentFirst) ideasContentFirst.innerHTML = t.ideasText;
+                if (ideasContentLast) ideasContentLast.innerHTML = `<i class="fas fa-info-circle"></i> ${t.ideasNote}`;
+                if (collaborationTitle) collaborationTitle.innerHTML = `<i class="fas fa-handshake"></i> ${t.collaborationTitle}`;
+                if (collaborationText) collaborationText.innerHTML = t.collaborationText;
+                if (collaborationNote) collaborationNote.innerHTML = `<i class="fas fa-info-circle"></i> ${t.collaborationNote}`;
+                if (artistTitle) artistTitle.innerHTML = `<i class="fas fa-paint-brush"></i> ${t.artistTitle}`;
+                if (artistText) artistText.textContent = t.artistText;
+                if (emailTitle) emailTitle.textContent = t.emailTitle;
+                if (emailDescription) emailDescription.textContent = t.emailDescription;
+                if (emailNote) emailNote.textContent = t.emailNote;
+                if (gameChoiceTitle) gameChoiceTitle.textContent = t.gameChoiceTitle;
+                if (gameChoiceText) gameChoiceText.textContent = t.gameChoiceText;
+                if (gameChoiceNote) gameChoiceNote.textContent = t.gameChoiceNote;
+                if (gameButton) gameButton.innerHTML = `<i class="fas fa-external-link-alt"></i> ${t.gameButtonText}`;
+                if (catalogButton) catalogButton.innerHTML = `<i class="fas fa-folder-open"></i> ${t.catalogButtonText}`;
+                if (bioButton) bioButton.innerHTML = `<i class="fas fa-dna"></i> ${t.bioButtonText}`;
+                if (principlesButton) principlesButton.innerHTML = `<i class="fas fa-book"></i> ${t.principlesButtonText}`;
+                if (saikonoElement) saikonoElement.textContent = t.saikono;
+                if (footerElement) footerElement.textContent = t.footer;
+                if (copyrightElement) {
+                    const yearText = lang === 'en' ? "© 2021-2026 Singinx Studio. All rights reserved." : "© 2021-2026 Singinx Studio. Все права защищены.";
+                    const highlightText = lang === 'en' ? "The laziest developers group™" : "Самые ленивые разработчики™";
+                    copyrightElement.innerHTML = `${yearText} <span class="footer-highlight">${highlightText}</span>`;
                 }
                 
-                .studio-title {
-                    animation: float 6s ease-in-out infinite;
+                if (aiTag) aiTag.textContent = t.aiTag;
+                if (loreTag) loreTag.textContent = t.loreTag;
+                
+                const langToggle = document.getElementById('langToggle');
+                if (langToggle) {
+                    langToggle.innerHTML = `<i class="fas fa-language"></i> ${t.langBtn}`;
+                    langToggle.setAttribute('aria-label', isEnglish ? 'Switch to Russian' : 'Переключить на английский');
                 }
-            `;
-            document.head.appendChild(style);
-        });
+            }
+        })();
     </script>
 </body>
 </html>
